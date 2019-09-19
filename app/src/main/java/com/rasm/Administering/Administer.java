@@ -1,9 +1,12 @@
 package com.rasm.Administering;
 
+import android.content.Context;
+
 public class Administer {
 
     private static Administer administer;
 
+    private static Context context;
     private Administer(){
         load_data();
 
@@ -21,6 +24,10 @@ public class Administer {
             administer = new Administer();
         }
         return administer;
+    }
+
+    public static void setContext(Context context){
+        Administer.context = context;
     }
 
     /*

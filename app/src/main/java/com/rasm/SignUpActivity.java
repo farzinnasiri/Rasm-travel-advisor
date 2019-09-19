@@ -74,7 +74,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             makeToast( "این نام کاربری توسط کاربر دیگری ساخته شده است" );
 
         }
-        else if(!Pattern.matches("\\d{11}" , phone)){
+        else if(!Pattern.matches("(\\+98|0)?9\\d{9}" , phone)){
             makeToast( "شماره تلفن معتبر نمی باشد"  );
             return false;
         } else if( password.length() < 4) {
