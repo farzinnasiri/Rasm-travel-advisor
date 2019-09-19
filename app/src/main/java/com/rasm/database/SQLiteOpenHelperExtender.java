@@ -209,6 +209,25 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         }
         return list;
     }
+
+    public void insertNewAdventure(String ID, String userName, int condition, String stream, int style, int visibility) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(AdventureContract.AdventureEntry.COLUMN_USER, userName);
+        cv.put(AdventureContract.AdventureEntry.COLUMN_CONDITION, condition);
+        cv.put(AdventureContract.AdventureEntry.COLUMN_STREAM, stream);
+        cv.put(AdventureContract.AdventureEntry.COLUMN_STYLE, style);
+//        cv.put(AdventureContract.AdventureEntry.COLUMN_UPLOADEDFILES, );
+        cv.put(AdventureContract.AdventureEntry.COLUMN_VISIBILITY, visibility);
+        db.insert(AdventureContract.AdventureEntry.TABLE_NAME, null, cv);
+        cv = new ContentValues();
+        cv.put(UserAdventureContract.UserAdventureEntry.COLUMN_USER, userName);
+        cv.put(UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE,ID);
+        db.insert(UserAdventureContract.UserAdventureEntry.TABLE_NAME, null, cv);
+
+//        insertBitmap(image, UserContract.UserEntry.TABLE_NAME, UserContract.UserEntry.COLUMN_PROFILE_PICTURE);
+
+    }
 //    public int getUserCondition(String userName){
 //
 //    }
