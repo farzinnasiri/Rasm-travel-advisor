@@ -14,6 +14,7 @@ import android.util.Log;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.ResultSet;
 
 public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
@@ -151,12 +152,35 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
     }
 
 
-    public boolean checkForUser(String userName) {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT userName FROM myTable",null);
-//        if c.
-//        db.exe
+    public boolean checkForUserName(String userName) {
+       SQLiteDatabase db = getReadableDatabase();
+       Cursor cursor = db.rawQuery("SELECT "+ UserContract.UserEntry.COLUMN_NAME +" FROM " + UserContract.UserEntry.TABLE_NAME, null);
+        if(cursor.getString(0) == userName)
+            return checkForUserPhone(userName);
 
-return true;
+        return false;
     }
+
+    public boolean checkForUserPhone(String userName) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT "+ UserContract.UserEntry.COLUMN_PHONE +" FROM " + UserContract.UserEntry.TABLE_NAME, null);
+        if(cursor.getString(0) == userName)
+            return true;
+
+        return false;
+    }
+
+
+    public boolean userpassMatches(String userName, String pass){
+        SQLiteDatabase db = getReadableDatabase();
+        if(checkForUserName(userName)){
+
+            Cursor cursor = db.rawQuery("SELECT "+ UserContract.UserEntry.COLUMN_PASS +" FROM " + UserContract.UserEntry.TABLE_NAME , null);
+            if(cursor.getString(0) == pass)
+                    return true;}
+
+        return false;
+    }
+
+
 }
