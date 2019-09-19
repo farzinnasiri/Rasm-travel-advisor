@@ -1,9 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#3366cc"
+    android:orientation="vertical"
     tools:context=".UserProfileActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/dashboard_profile_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/dashboard_user_photo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/avatar" />
+
+        <TextView
+            android:id="@+id/dashboard_txt_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dashboard_txt_username"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/vazir"
+            android:text="10 امتیاز "
+            android:textColor="@color/white"
+            android:textDirection="rtl"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/dashboard_txt_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/vazir"
+            android:text="نام کاربری"
+            android:textColor="@color/white"
+            android:textDirection="rtl"
+            android:textSize="22sp" />
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_dashboard_background">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+
+            <TextView
+                android:id="@+id/email_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="50dp"
+                android:fontFamily="@font/vazir"
+                android:text="ایمیل"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/email_EditText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/email_TextView"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:fontFamily="@font/vazir"
+                android:text="amirshabanics@gmail.com"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+
+
+
+
+            <TextView
+                android:id="@+id/phone_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/email_EditText"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="50dp"
+                android:fontFamily="@font/vazir"
+                android:text="شماره تلفن"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <EditText
+            android:id="@+id/phone_EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_TextView"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:fontFamily="@font/vazir"
+            android:text="09123546698"
+                android:inputType="number" android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/visibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50dp"
+                android:layout_below="@id/phone_EditText"
+                android:layout_marginTop="50dp"
+               android:textSize="22sp"
+            android:textStyle="bold"
+                android:text="حریم خصوصی"
+                />
+            <RadioGroup
+                android:id="@+id/radioGroupInProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/visibility"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="75dp"
+                android:layout_marginLeft="50dp"
+
+                >
+
+                <RadioButton
+                    android:id="@+id/allRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="همه"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/FriendsOnlyRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="22sp"
+                    android:text="فقط دوستان" />
+
+                <RadioButton
+                    android:id="@+id/nobodyRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+                    android:text="هیچکس" />
+            </RadioGroup>
+        </RelativeLayout>
+    </ScrollView>
+
+
+</LinearLayout>
