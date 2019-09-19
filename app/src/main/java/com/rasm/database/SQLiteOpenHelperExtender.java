@@ -15,6 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
@@ -155,32 +156,81 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
     public boolean checkForUserName(String userName) {
        SQLiteDatabase db = getReadableDatabase();
        Cursor cursor = db.rawQuery("SELECT "+ UserContract.UserEntry.COLUMN_NAME +" FROM " + UserContract.UserEntry.TABLE_NAME, null);
-        if(cursor.getString(0) == userName)
-            return checkForUserPhone(userName);
-
-        return false;
+        cursor.moveToFirst();
+        while(cursor!=null) {
+            if(cursor.getString(0) == userName)
+                 return true;
+            cursor.moveToNext();
+        }
+        return checkForUserPhone(userName);
     }
 
     public boolean checkForUserPhone(String userName) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+ UserContract.UserEntry.COLUMN_PHONE +" FROM " + UserContract.UserEntry.TABLE_NAME, null);
-        if(cursor.getString(0) == userName)
-            return true;
-
+        cursor.moveToFirst();
+        while(cursor!=null) {
+            if (cursor.getString(0) == userName)
+                return true;
+            cursor.moveToNext();
+        }
         return false;
     }
 
 
     public boolean userpassMatches(String userName, String pass){
         SQLiteDatabase db = getReadableDatabase();
-        if(checkForUserName(userName)){
+        if(checkForUserName(userName)) {
 
-            Cursor cursor = db.rawQuery("SELECT "+ UserContract.UserEntry.COLUMN_PASS +" FROM " + UserContract.UserEntry.TABLE_NAME , null);
-            if(cursor.getString(0) == pass)
-                    return true;}
+            Cursor cursor = db.rawQuery("SELECT " + UserContract.UserEntry.COLUMN_PASS+", "+ UserContract.UserEntry.COLUMN_NAME + " FROM " + UserContract.UserEntry.TABLE_NAME + " WHERE "+ UserContract.UserEntry.COLUMN_NAME + "= '" + userName+"' ,"+ UserContract.UserEntry.COLUMN_PASS + " = '"+pass+"'", null);
+            cursor.moveToFirst();
+                if(cursor.getColumnIndex(UserContract.UserEntry.COLUMN_NAME)!=-1)
+                    return true;
 
+
+        }
         return false;
     }
+
+
+    public String getUserMail(String userName){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT "+ UserContract.UserEntry.COLUMN_EMAIL +" FROM " + UserContract.UserEntry.TABLE_NAME +" WHERE "+ UserContract.UserEntry.COLUMN_NAME+"= '"+userName+"'", null);
+       return cursor.getString(0);
+    }
+    public ArrayList<Adventure> getUserAdventures(String userName){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT "+ UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE +" FROM " + UserAdventureContract.UserAdventureEntry.TABLE_NAME +" WHERE "+ UserAdventureContract.UserAdventureEntry.COLUMN_USER+"= "+userName+"'", null);
+        ArrayList<Adventure> list = new ArrayList<Adventure>();
+        cursor.moveToFirst();
+        while(cursor!=null) {
+            list.add(new Adventure(cursor.getBlob(0)));
+            cursor.moveToNext();
+        }
+        return list;
+    }
+
+    public void insertNewAdventure(String ID, String userName, int condition, String stream, int style, int visibility) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(AdventureContract.AdventureEntry.COLUMN_USER, userName);
+        cv.put(AdventureContract.AdventureEntry.COLUMN_CONDITION, condition);
+        cv.put(AdventureContract.AdventureEntry.COLUMN_STREAM, stream);
+        cv.put(AdventureContract.AdventureEntry.COLUMN_STYLE, style);
+//        cv.put(AdventureContract.AdventureEntry.COLUMN_UPLOADEDFILES, );
+        cv.put(AdventureContract.AdventureEntry.COLUMN_VISIBILITY, visibility);
+        db.insert(AdventureContract.AdventureEntry.TABLE_NAME, null, cv);
+        cv = new ContentValues();
+        cv.put(UserAdventureContract.UserAdventureEntry.COLUMN_USER, userName);
+        cv.put(UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE,ID);
+        db.insert(UserAdventureContract.UserAdventureEntry.TABLE_NAME, null, cv);
+
+//        insertBitmap(image, UserContract.UserEntry.TABLE_NAME, UserContract.UserEntry.COLUMN_PROFILE_PICTURE);
+
+    }
+//    public int getUserCondition(String userName){
+//
+//    }
 
 
 }
