@@ -12,7 +12,6 @@ public class Administer {
     private boolean isLoggedIn;
     private Administer(){
         load_data();
-        isLoggedIn = true;
     }
 
     /*
@@ -32,6 +31,23 @@ public class Administer {
 
     public boolean isLoggedIn(){
         return  isLoggedIn;
+    }
+
+    public void setLoggedIn(boolean isLoggedIn){
+        this.isLoggedIn = isLoggedIn;
+        updateData();
+    }
+
+    private void updateData() {
+        update_to_storage();
+    }
+
+    private void update_to_storage() {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isLoggedIn", isLoggedIn);
+        editor.apply();
     }
 
     public static Administer getInstance(){

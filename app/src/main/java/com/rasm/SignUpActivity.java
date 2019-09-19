@@ -57,6 +57,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             if(if_obey_rules()){
 
+                Administer.getInstance().setLoggedIn(true);
+
                 makeToast("اطلاعات شما با موفقیت ثبت گردید");
                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
 //                intent.putExtra("username", username);
