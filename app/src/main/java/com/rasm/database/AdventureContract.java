@@ -16,7 +16,8 @@ public class AdventureContract {
         public static final String COLUMN_STREAM = "stream";
         public static final String COLUMN_VISIBILITY = "visibility";
         public static final String COLUMN_CONDITION = "condition";
-        public static final String COLUMN_UPLOADEDFILES = "uploaded";
+        public static final String COLUMN_IMAGES = "images";
+        public static final String COLUMN_DESCRIPTIONS = "descriptions";
         public static final String COLUMN_STYLE = "style";
 
         public static final int STYLE_ONE_PERSON = 0;

@@ -13,10 +13,11 @@ import android.util.Log;
 
 import com.rasm.adventures.Adventure;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.sql.ResultSet;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,7 +31,8 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + AdventureContract.AdventureEntry.COLUMN_USER + " TEXT NOT NULL, "
             + AdventureContract.AdventureEntry.COLUMN_CONDITION + " INTEGER NOT NULL DEFAULT 0, "
             + AdventureContract.AdventureEntry.COLUMN_VISIBILITY + " INTEGER NOT NULL DEFAULT 0, "
-            + AdventureContract.AdventureEntry.COLUMN_UPLOADEDFILES + " BLOB, "
+            + AdventureContract.AdventureEntry.COLUMN_IMAGES + " TEXT, "
+            + AdventureContract.AdventureEntry.COLUMN_DESCRIPTIONS + " TEXT, "
             + AdventureContract.AdventureEntry.COLUMN_STREAM + " TEXT, "
             + AdventureContract.AdventureEntry.COLUMN_STYLE + " INTEGER NOT NULL DEFAULT 0);";
     private static final String SQL_CREATE_ENTRIES_USERS = "CREATE TABLE " + UserContract.UserEntry.TABLE_NAME + " ("
@@ -51,7 +53,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES_PLACES = "CREATE TABLE " + PlaceContract.PlaceEntry.TABLE_NAME + " ("
             +  PlaceContract.PlaceEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             +  PlaceContract.PlaceEntry.COLUMN_DESCRIPTION + " TEXT, "
-            + PlaceContract.PlaceEntry.COLUMN_IMAGES + " BLOB, "
+            + PlaceContract.PlaceEntry.COLUMN_IMAGES + " TEXT, "
             +  PlaceContract.PlaceEntry.COLUMN_NAME + " TEXT NOT NULL, "
             + PlaceContract.PlaceEntry.COLUMN_POSITION + " VARCHAR);";
 
@@ -248,12 +250,34 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             String advId = cursor.getString(0);
             Cursor c = db.rawQuery("SELECT "+ AdventureContract.AdventureEntry._ID +" FROM " + UserContract.UserEntry.TABLE_NAME +" WHERE "+ UserContract.UserEntry._ID+"= '"+advId+"'", null);
             c.moveToFirst();
-            list.add(new Adventure(c.getBlob(0)));
-
+            list.add(new Adventure(getAdventureDatas(advId)));
             cursor.moveToNext();
         }
         return list;
     }
+
+    public HashMap getAdventureDatas(String advId){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + AdventureContract.AdventureEntry.TABLE_NAME +" WHERE "+ AdventureContract.AdventureEntry._ID+"= '"+advId+"'", null);
+        HashMap map = new HashMap();
+        int i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_CONDITION);
+        map.put("condition", cursor.getString(i));
+        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_DESCRIPTIONS);
+        map.put("description", cursor.getString(i));
+        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_STREAM);
+        map.put("stream", cursor.getString(i));
+        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_STYLE);
+        map.put("style", cursor.getString(i));
+        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_VISIBILITY);
+        map.put("visibility", cursor.getString(i));
+        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_USER);
+        map.put("user", cursor.getString(i));
+        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_IMAGES);
+        map.put("images", stringToBitmapArray(cursor.getString(i)));
+        return map;
+
+    }
+
     public ArrayList<String> getAdventureUsers(String advID){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+ UserAdventureContract.UserAdventureEntry.COLUMN_USER +" FROM " + UserAdventureContract.UserAdventureEntry.TABLE_NAME +" WHERE "+ UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE+"= '"+advID+"'", null);
@@ -266,14 +290,15 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         return list;
     }
 
-    public void insertNewAdventure(String ID, String userName, int condition, String stream, int style, int visibility) {
+    public void insertNewAdventure(String ID, String userName, int condition, String stream, int style, int visibility,ArrayList<Bitmap> images, String descriptions) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(AdventureContract.AdventureEntry.COLUMN_USER, userName);
         cv.put(AdventureContract.AdventureEntry.COLUMN_CONDITION, condition);
         cv.put(AdventureContract.AdventureEntry.COLUMN_STREAM, stream);
         cv.put(AdventureContract.AdventureEntry.COLUMN_STYLE, style);
-//        cv.put(AdventureContract.AdventureEntry.COLUMN_UPLOADEDFILES, );
+        cv.put(AdventureContract.AdventureEntry.COLUMN_IMAGES, arrayBitmapToJsonString(images));
+        cv.put(AdventureContract.AdventureEntry.COLUMN_DESCRIPTIONS, descriptions);
         cv.put(AdventureContract.AdventureEntry.COLUMN_VISIBILITY, visibility);
         db.insert(AdventureContract.AdventureEntry.TABLE_NAME, null, cv);
         cv = new ContentValues();
@@ -294,7 +319,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         cv.put(PlaceContract.PlaceEntry.COLUMN_NAME, name);
         cv.put(PlaceContract.PlaceEntry.COLUMN_POSITION, position);
         cv.put(PlaceContract.PlaceEntry.COLUMN_DESCRIPTION, describe);
-//        cv.put(PlaceContract.PlaceEntry.COLUMN_IMAGES, images);
+        cv.put(PlaceContract.PlaceEntry.COLUMN_IMAGES, arrayBitmapToJsonString(images));
         db.insert(UserContract.UserEntry.TABLE_NAME, null, cv);
 
     }
@@ -307,15 +332,46 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_NAME);
         map.put("name", cursor.getString(i));
         i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PASS);
-        ArrayList<Bitmap> images = BlobToBitmapArray(cursor.getBlob(i));
+        ArrayList<Bitmap> images = stringToBitmapArray(cursor.getString(i));
         map.put("images",images);
 
         return map;
     }
 
-    private ArrayList<Bitmap> BlobToBitmapArray(byte[] blob) {
-        //alaki
-        return new ArrayList<>();
+    private ArrayList<Bitmap> stringToBitmapArray(String json) {
+        JSONArray jsonArr = null;
+        ArrayList<Bitmap> images = new ArrayList<Bitmap>();
+        try {
+            jsonArr = new JSONArray(json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        for(int i =0;i<jsonArr.length();i++){
+            byte[] bytes = null;
+            Bitmap bitmap = null;
+            try {
+                String str = (String)jsonArr.get(i);
+                bytes = str.getBytes(Charset.forName("UTF-8"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            images.add(bitmap);
+        }
+
+        return  images;
+    }
+
+    private String arrayBitmapToJsonString(ArrayList<Bitmap> images){
+    JSONArray jsonArr = new JSONArray();
+    for(int i=0;i<images.size();i++){
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        images.get(i).compress(Bitmap.CompressFormat.PNG, 100, out);
+        byte[] buffer = out.toByteArray();
+        String s = new String(buffer, Charset.forName("UTF-8"));
+        jsonArr.put(s);
+    }
+    return jsonArr.toString();
     }
 
 }
