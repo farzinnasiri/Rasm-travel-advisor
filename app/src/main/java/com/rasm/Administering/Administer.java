@@ -12,6 +12,7 @@ public class Administer {
     private boolean isLoggedIn;
     private Administer(){
         load_data();
+        isLoggedIn = true;
     }
 
     /*
