@@ -273,7 +273,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 //    public int getUserCondition(String userName){
 //
 //    }
-    public
+
 
 
 }
