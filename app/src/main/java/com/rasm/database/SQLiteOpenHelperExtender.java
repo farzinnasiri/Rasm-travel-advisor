@@ -235,7 +235,11 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         ArrayList<Adventure> list = new ArrayList<Adventure>();
         cursor.moveToFirst();
         while(cursor!=null) {
-            list.add(new Adventure(cursor.getBlob(0)));
+            String advId = cursor.getString(0);
+            Cursor c = db.rawQuery("SELECT "+ AdventureContract.AdventureEntry._ID +" FROM " + UserContract.UserEntry.TABLE_NAME +" WHERE "+ UserContract.UserEntry._ID+"= '"+advId+"'", null);
+            c.moveToFirst();
+            list.add(new Adventure(c.getBlob(0)));
+
             cursor.moveToNext();
         }
         return list;
