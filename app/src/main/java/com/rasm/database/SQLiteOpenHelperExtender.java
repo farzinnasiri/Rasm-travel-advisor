@@ -231,11 +231,22 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
     public ArrayList<Adventure> getUserAdventures(String userName){
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT "+ UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE +" FROM " + UserAdventureContract.UserAdventureEntry.TABLE_NAME +" WHERE "+ UserAdventureContract.UserAdventureEntry.COLUMN_USER+"= "+userName+"'", null);
+        Cursor cursor = db.rawQuery("SELECT "+ UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE +" FROM " + UserAdventureContract.UserAdventureEntry.TABLE_NAME +" WHERE "+ UserAdventureContract.UserAdventureEntry.COLUMN_USER+"= '"+userName+"'", null);
         ArrayList<Adventure> list = new ArrayList<Adventure>();
         cursor.moveToFirst();
         while(cursor!=null) {
             list.add(new Adventure(cursor.getBlob(0)));
+            cursor.moveToNext();
+        }
+        return list;
+    }
+    public ArrayList<String> getAdventureUsers(String advID){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT "+ UserAdventureContract.UserAdventureEntry.COLUMN_USER +" FROM " + UserAdventureContract.UserAdventureEntry.TABLE_NAME +" WHERE "+ UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE+"= '"+advID+"'", null);
+        ArrayList<String> list = new ArrayList<String>();
+        cursor.moveToFirst();
+        while(cursor!=null) {
+            list.add(cursor.getString(0));
             cursor.moveToNext();
         }
         return list;
@@ -262,6 +273,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 //    public int getUserCondition(String userName){
 //
 //    }
+    public
 
 
 }
