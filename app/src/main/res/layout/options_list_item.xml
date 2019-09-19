@@ -23,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/option_image"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
                 android:src="@drawable/avatar"
 
                 />
