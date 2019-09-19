@@ -27,6 +27,10 @@
             android:name=".SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
     </application>
 
 </manifest>

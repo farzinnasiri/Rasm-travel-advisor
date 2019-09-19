@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TabHost;
 import android.widget.Toast;
 
 
@@ -27,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_layout);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         initUi();
 
         signUp.setOnClickListener(this);
@@ -59,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 makeToast("اطلاعات شما با موفقیت ثبت گردید");
                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                intent.putExtra("username", username);
+//                intent.putExtra("username", username);
                 startActivity(intent);
             }
 
