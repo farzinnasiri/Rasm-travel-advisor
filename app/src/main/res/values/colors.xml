@@ -19,5 +19,6 @@
     <color name="grey">#949393</color>
     >
     <color name="transparent">#11000000</color>
+    <color name="dashboard_background">#3366cc</color>
 
 </resources>
