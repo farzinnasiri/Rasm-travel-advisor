@@ -1,6 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <resources>
+
+    <color name="material_drawer_selected_text">#3F51B5</color>
+
+    <color name="material_drawer_dark_selected_text">#3F51B5</color>
+
     <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+
+    <color name="colorPrimaryDark">#FF045881</color>
+
     <color name="colorAccent">#D81B60</color>
+
+    <color name="lightBlue">#068DCC</color>
+
+    <color name="white">#FFFFFF</color>
+    >
+    <color name="grey">#949393</color>
+    >
+    <color name="transparent">#11000000</color>
+
 </resources>
