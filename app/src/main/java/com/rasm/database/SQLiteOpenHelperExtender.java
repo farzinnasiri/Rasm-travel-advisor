@@ -19,12 +19,20 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             +AdventureContract.AdventureEntry.COLUMN_STREAM + " TEXT, "
             +AdventureContract.AdventureEntry.COLUMN_STYLE + " INTEGER NOT NULL DEFAULT 0);";
     private static final String SQL_CREATE_ENTRIES_USERS = "CREATE TABLE "+ UserContract.UserEntry.TABLE_NAME +" ("
-            +UserContract.UserEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
-            +UserContract.UserEntry.COLUMN_NAME + " TEXT NOT NULL, "
+//            +UserContract.UserEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +UserContract.UserEntry.COLUMN_NAME + " TEXT PRIMARY KEY NOT NULL, "
+            +UserContract.UserEntry.COLUMN_PASS + " TEXT NOT NULL, "
+            +UserContract.UserEntry.COLUMN_PHONE + " VARCHAR NOT NULL, "
+            +UserContract.UserEntry.COLUMN_PROFILE_PICTURE + " TEXT NOT NULL, "
+            +UserContract.UserEntry.COLUMN_EMAIL + " TEXT NOT NULL, "
             +UserContract.UserEntry.COLUMN_ADVENTURES + " TEXT, "
             +UserContract.UserEntry.COLUMN_VISIBILITY + " INTEGER NOT NULL DEFAULT 0, "
             +UserContract.UserEntry.COLUMN_UPLOADEDFILES + " TEXT, "
             +UserContract.UserEntry.COLUMN_SCORE + " INTEGER NOT NULL DEFAULT 0);";
+    private static final String SQL_CREATE_ENTRIES_USER_ADVENTURE = "CREATE TABLE "+ UserAdventureContract.UserAdventureEntry.TABLE_NAME +" ("
+//            +UserContract.UserEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +"FOREIGN KEY(" + UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE + ") REFERENCES " + AdventureContract.AdventureEntry.TABLE_NAME       + "(" + AdventureContract.AdventureEntry._ID + ")  ON DELETE CASCADE ON UPDATE CASCADE , "
+            +"FOREIGN KEY(" + UserAdventureContract.UserAdventureEntry.COLUMN_USER + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME       + "(" + UserContract.UserEntry.COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE;";
 
     public SQLiteOpenHelperExtender(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -46,4 +54,8 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+
+
+
+
 }
