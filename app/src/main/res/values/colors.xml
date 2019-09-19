@@ -20,5 +20,6 @@
     >
     <color name="transparent">#11000000</color>
     <color name="dashboard_background">#3366cc</color>
+    <color name="dark">#0E0E0F</color>
 
 </resources>
