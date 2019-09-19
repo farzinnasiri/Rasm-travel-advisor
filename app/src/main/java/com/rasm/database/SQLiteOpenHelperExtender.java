@@ -33,8 +33,8 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + UserContract.UserEntry.COLUMN_NAME + " TEXT PRIMARY KEY NOT NULL, "
             + UserContract.UserEntry.COLUMN_PASS + " TEXT NOT NULL, "
             + UserContract.UserEntry.COLUMN_PHONE + " VARCHAR NOT NULL, "
-            + UserContract.UserEntry.COLUMN_PROFILE_PICTURE + " TEXT NOT NULL, "
-            + UserContract.UserEntry.COLUMN_EMAIL + " TEXT NOT NULL, "
+            + UserContract.UserEntry.COLUMN_PROFILE_PICTURE + " TEXT, "
+            + UserContract.UserEntry.COLUMN_EMAIL + " TEXT, "
             + UserContract.UserEntry.COLUMN_ADVENTURES + " TEXT, "
             + UserContract.UserEntry.COLUMN_VISIBILITY + " INTEGER NOT NULL DEFAULT 0, "
             + UserContract.UserEntry.COLUMN_UPLOADEDFILES + " TEXT, "
@@ -101,7 +101,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
     }
 
 
-    public Bitmap getBitmap(int id, String tableName, String columnName) {
+    public Bitmap getBitmap(String tableName, String columnName) {
         Bitmap bitmap = null;
         // Open the database for reading
         SQLiteDatabase db = this.getReadableDatabase();
@@ -109,7 +109,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         db.beginTransaction();
 
         try {
-            String selectQuery = "SELECT * FROM " + tableName + " WHERE id = " + id;
+            String selectQuery = "SELECT"+ columnName+" FROM " + tableName;
             Cursor cursor = db.rawQuery(selectQuery, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
@@ -153,6 +153,8 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
     public boolean checkForUser(String userName) {
         SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT userName FROM myTable",null);
+//        if c.
 //        db.exe
 
 return true;
