@@ -1,22 +1,36 @@
 package com.rasm.Administering;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class Administer {
 
     private static Administer administer;
-
     private static Context context;
+
+    private boolean isLoggedIn;
     private Administer(){
         load_data();
-
     }
 
     /*
         sync from database
      */
     private void load_data() {
+        load_from_storage();
+    }
 
+    private void load_from_storage() {
+
+          SharedPreferences sharedPreferences = PreferenceManager
+                  .getDefaultSharedPreferences(context);
+          isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+    }
+
+    public boolean isLoggedIn(){
+        return  isLoggedIn;
     }
 
     public static Administer getInstance(){

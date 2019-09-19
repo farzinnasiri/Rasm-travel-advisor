@@ -59,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 makeToast("اطلاعات شما با موفقیت ثبت گردید");
                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                intent.putExtra("username", username);
+//                intent.putExtra("username", username);
                 startActivity(intent);
             }
 
