@@ -10,6 +10,7 @@ public class Administer {
     private static Context context;
 
     private boolean isLoggedIn;
+    private String username;
     private Administer(){
         load_data();
     }
@@ -26,6 +27,9 @@ public class Administer {
           SharedPreferences sharedPreferences = PreferenceManager
                   .getDefaultSharedPreferences(context);
           isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+          if(isLoggedIn){
+              username = sharedPreferences.getString("username" , "");
+          }
 
     }
 
@@ -47,6 +51,7 @@ public class Administer {
                 .getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isLoggedIn", isLoggedIn);
+        editor.putString("username" , username);
         editor.apply();
     }
 
