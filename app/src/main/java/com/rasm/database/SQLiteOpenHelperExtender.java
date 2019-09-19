@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
@@ -196,8 +197,38 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
     public String getUserMail(String userName){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+ UserContract.UserEntry.COLUMN_EMAIL +" FROM " + UserContract.UserEntry.TABLE_NAME +" WHERE "+ UserContract.UserEntry.COLUMN_NAME+"= '"+userName+"'", null);
-       return cursor.getString(0);
+       cursor.moveToFirst();
+        return cursor.getString(0);
     }
+
+    public String getUserScore(String userName){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT "+ UserContract.UserEntry.COLUMN_SCORE +" FROM " + UserContract.UserEntry.TABLE_NAME +" WHERE "+ UserContract.UserEntry.COLUMN_NAME+"= '"+userName+"'", null);
+        cursor.moveToFirst();
+        return cursor.getString(0);
+    }
+
+    public HashMap getUserDatas(String userName){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + UserContract.UserEntry.TABLE_NAME +" WHERE "+ UserContract.UserEntry.COLUMN_NAME+"= '"+userName+"'", null);
+        HashMap map = new HashMap();
+        int i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_SCORE);
+        map.put("score", cursor.getString(i));
+         i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_EMAIL);
+        map.put("email", cursor.getString(i));
+         i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PASS);
+        map.put("pass", cursor.getString(i));
+         i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PHONE);
+        map.put("phone", cursor.getString(i));
+         i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_VISIBILITY);
+        map.put("visibility", cursor.getString(i));
+        map.put("score",getBitmap(UserContract.UserEntry.TABLE_NAME, UserContract.UserEntry.COLUMN_PROFILE_PICTURE));
+        i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_ADVENTURES);
+        map.put("adventures",cursor.getBlob(i));
+        return map;
+
+    }
+
     public ArrayList<Adventure> getUserAdventures(String userName){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT "+ UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE +" FROM " + UserAdventureContract.UserAdventureEntry.TABLE_NAME +" WHERE "+ UserAdventureContract.UserAdventureEntry.COLUMN_USER+"= "+userName+"'", null);
