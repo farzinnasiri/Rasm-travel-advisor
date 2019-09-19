@@ -1,8 +1,11 @@
 package com.rasm.Administering;
 
+import com.rasm.database.SQLiteOpenHelperExtender;
+
 public class Administer {
 
     private static Administer administer;
+    private SQLiteOpenHelperExtender db;
 
     private Administer(){
         load_data();
