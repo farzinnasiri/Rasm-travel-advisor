@@ -70,17 +70,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String username = this.username.getText().toString();
         String password = this.password.getText().toString();
         String phone = phoneNumber.getText().toString() ;
-        if(!Pattern.matches("/^09[0-9]{11}" , phone)){
-            makeToast( "شماره تلفن معتبر نمی باشد"  );
-            return false;
-        } else if( password.length() < 4){
-            makeToast( "رمز عبور باید از 4 کارکتر بیشتر باشد" );
-            return false;
-        }else if(Administer.getInstance().if_username_exist(username)){
+        if(Administer.getInstance().if_username_exist(username)){
             makeToast( "این نام کاربری توسط کاربر دیگری ساخته شده است" );
 
         }
-        return true;
+        else if(!Pattern.matches("\\d{11}" , phone)){
+            makeToast( "شماره تلفن معتبر نمی باشد"  );
+            return false;
+        } else if( password.length() < 4) {
+            makeToast("رمز عبور باید از 4 کارکتر بیشتر باشد");
+            return false;
+        }
+            return true;
     }
 
 
