@@ -17,7 +17,7 @@ import java.util.List;
 public class OptionsRecyclerViewAdapter extends RecyclerView.Adapter<OptionsRecyclerViewAdapter
         .ViewHolder> {
 
-    private static final String TAG = "RecyclerViewAdapter";
+    private static final String TAG = "NewFriendsAdventureAdapter";
 
     //vars
     private List<String> titles = new ArrayList<>();
@@ -61,6 +61,7 @@ public class OptionsRecyclerViewAdapter extends RecyclerView.Adapter<OptionsRecy
     public int getItemCount() {
         return optionsImages.size();
     }
+
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
