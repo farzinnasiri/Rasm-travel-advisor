@@ -11,14 +11,21 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Administer.setContext(this);
+
         setContentView(R.layout.activity_splash_screen);
         Thread myThread = new Thread(){
             @Override
             public void run() {
                 try {
                     sleep(3000);
-                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                    Intent intent ;
+                    if(Administer.getInstance().isLoggedIn()){
+                        intent = new Intent(getApplicationContext() , MainActivity.class);
+                    }else {
+                        intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    }
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {
@@ -26,6 +33,9 @@ public class SplashScreen extends AppCompatActivity {
                 }
             }
         };
+
         myThread.start();
+
+
     }
 }
