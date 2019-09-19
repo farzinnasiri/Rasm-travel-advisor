@@ -23,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/option_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:src="@drawable/avatar"
 
                 />
@@ -37,7 +37,8 @@
                 android:text="ماجرا های من"
                 android:textColor="#6f6f6f"
                 android:textDirection="rtl"
-                android:textSize="18sp" />
+                android:fontFamily="@font/vazir"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
