@@ -53,10 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void switchActivity(Class cls) {
         startActivity(new Intent(LoginActivity.this, cls));
-        if (cls.equals(MainActivity.class)) {
-            finish();
 
-        }
     }
 }
 
