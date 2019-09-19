@@ -1,5 +1,6 @@
 package com.rasm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
 
+import com.rasm.adapters.NewFriendsAdventuresAdapter;
 import com.rasm.adapters.OptionsRecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -24,13 +26,28 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ImageView avatar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initAvatar();
+
+
         initRecyclerViewers();
 
+    }
+
+    private void initAvatar() {
+        avatar = findViewById(R.id.dashboard_user_photo);
+        avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this , UserProfileActivity.class));
+            }
+        });
     }
 
     private void initRecyclerViewers() {
@@ -41,16 +58,44 @@ public class MainActivity extends AppCompatActivity {
         titles.add("درباره ما");
         ArrayList<Integer> optionsImages = new ArrayList<>();
         optionsImages.add(R.drawable.adventures);
-        optionsImages.add(R.drawable.ic_settings);
-        optionsImages.add(R.drawable.ic_info);
+        optionsImages.add(R.drawable.setting);
+        optionsImages.add(R.drawable.info);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = findViewById(R.id.options_list);
-        recyclerView.setLayoutManager(layoutManager);
+        RecyclerView optionsRecyclerView = findViewById(R.id.options_list);
+        optionsRecyclerView.setLayoutManager(layoutManager);
         OptionsRecyclerViewAdapter adapter = new OptionsRecyclerViewAdapter(this, titles,
                 optionsImages);
-        recyclerView.setAdapter(adapter);
+        optionsRecyclerView.setAdapter(adapter);
+
+
+        ArrayList<String> newAdventuresTitles = new ArrayList<>();
+        newAdventuresTitles.add("آرامگاه سعدی");
+        newAdventuresTitles.add("تخت جمشید");
+        newAdventuresTitles.add("کاخ نیاوران");
+        newAdventuresTitles.add("آرامگاه حافظ");
+
+        ArrayList<String> userNames = new ArrayList<>();
+        userNames.add("کریم بزغاله");
+        userNames.add("علی گوساله");
+        userNames.add("لوبیا چشم بلبلی");
+        userNames.add("جمشید اوسکوله");
+
+        ArrayList<Integer> usersImages = new ArrayList<>();
+        usersImages.add(R.drawable.ic_girl);
+        usersImages.add(R.drawable.ic_man);
+        usersImages.add(R.drawable.ic_girl2);
+        usersImages.add(R.drawable.ic_boy);
+
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView newAdventuresRecyclerView = findViewById(R.id.new_adventures_list);
+        newAdventuresRecyclerView.setLayoutManager(layoutManager1);
+        NewFriendsAdventuresAdapter adapter2 = new NewFriendsAdventuresAdapter(this,userNames,
+                newAdventuresTitles,
+                usersImages);
+        newAdventuresRecyclerView.setAdapter(adapter2);
 
     }
 
