@@ -1,9 +1,19 @@
 package com.rasm.database;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
@@ -55,7 +65,84 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void insertBitmap(Bitmap bm)  {
+
+        // Convert the image into byte array
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, out);
+        byte[] buffer=out.toByteArray();
+        // Open the database for writing
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Start the transaction.
+        db.beginTransaction();
+        ContentValues values;
+
+        try
+        {
+            values = new ContentValues();
+            values.put("img", buffer);
+            values.put("description", "Image description");
+            // Insert Row
+            long i = db.insert(UserContract.UserEntry.TABLE_NAME, null, values);
+            Log.i("Insert", i + "");
+            // Insert into database successfully.
+            db.setTransactionSuccessful();
+
+        }
+        catch (SQLiteException e)
+        {
+            e.printStackTrace();
+
+        }
+        finally
+        {
+            db.endTransaction();
+            // End the transaction.
+            db.close();
+            // Close database
+        }
+    }
 
 
+    public Bitmap getBitmap(int id){
+        Bitmap bitmap = null;
+        // Open the database for reading
+        SQLiteDatabase db = this.getReadableDatabase();
+        // Start the transaction.
+        db.beginTransaction();
+
+        try
+        {
+            String selectQuery = "SELECT * FROM "+ UserContract.UserEntry.TABLE_NAME +" WHERE id = " + id;
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if(cursor.getCount() >0)
+            {
+                while (cursor.moveToNext()) {
+                    // Convert blob data to byte array
+                    byte[] blob = cursor.getBlob(cursor.getColumnIndex("img"));
+                    // Convert the byte array to Bitmap
+                    bitmap= BitmapFactory.decodeByteArray(blob, 0, blob.length);
+
+                }
+
+            }
+            db.setTransactionSuccessful();
+
+        }
+        catch (SQLiteException e)
+        {
+            e.printStackTrace();
+
+        }
+        finally
+        {
+            db.endTransaction();
+            // End the transaction.
+            db.close();
+            // Close database
+        }
+        return bitmap;
+
+    }
 
 }
