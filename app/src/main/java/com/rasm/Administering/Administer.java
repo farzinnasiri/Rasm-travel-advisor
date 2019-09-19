@@ -1,12 +1,12 @@
 package com.rasm.Administering;
 
-import com.rasm.database.SQLiteOpenHelperExtender;
+import android.content.Context;
 
 public class Administer {
 
     private static Administer administer;
-    private SQLiteOpenHelperExtender db;
 
+    private static Context context;
     private Administer(){
         load_data();
 
@@ -24,6 +24,10 @@ public class Administer {
             administer = new Administer();
         }
         return administer;
+    }
+
+    public static void setContext(Context context){
+        Administer.context = context;
     }
 
     /*
