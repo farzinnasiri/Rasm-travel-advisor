@@ -77,6 +77,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        onUpgrade( db, DATABASE_VERSION, 2);
         db.execSQL(SQL_CREATE_ENTRIES_ADVENTURES);
         db.execSQL(SQL_CREATE_ENTRIES_USERS);
         db.execSQL(SQL_CREATE_ENTRIES_USER_ADVENTURE);

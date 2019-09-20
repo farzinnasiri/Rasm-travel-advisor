@@ -8,7 +8,7 @@ public class UserContract {
 
     public static final class UserEntry implements BaseColumns {
 
-        public static final String TABLE_NAME = "adventures";
+        public static final String TABLE_NAME = "users";
 
         public static final String _ID = BaseColumns._ID;
         public static final String _COLUMN_NAME = "name";
