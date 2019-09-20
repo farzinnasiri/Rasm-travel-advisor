@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rasm.Administering.Administer;
 import com.rasm.DetailedAdventureActivity;
 import com.rasm.R;
 import com.rasm.adventures.Adventure;
@@ -42,7 +43,8 @@ public class AdventuresRecyclerViewAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.username.setText(adventures.get(position).getUsername());
+        viewHolder.username.setText(Administer.getInstance()
+                .getUsers(adventures.get(position).getId()).get(0).getUsername());
 
         viewHolder.title.setText(adventures.get(position).getTitle());
         viewHolder.desc.setText(adventures.get(position).getDescriptions());
