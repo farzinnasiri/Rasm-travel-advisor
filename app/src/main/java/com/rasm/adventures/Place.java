@@ -14,7 +14,11 @@ public class Place {
     private ArrayList<Bitmap> images;
 
     public Place(HashMap map) {
-
+    this.images = map.get("images");
+    this.description = map.get("description");
+    this.name = map.get("name");
+    this.type = map.get("type");
+    this.location = map.get("position");
 
     }
 

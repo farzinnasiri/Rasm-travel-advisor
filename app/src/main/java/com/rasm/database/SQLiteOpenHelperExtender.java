@@ -403,6 +403,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_TYPE);
         map.put("type", cursor.getString(i));
         map.put("position", position);
+        map.put("images",getPlaceImages(position) );
         return map;
     }
 
