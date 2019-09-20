@@ -59,7 +59,6 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + PlaceContract.PlaceEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PlaceContract.PlaceEntry.COLUMN_DESCRIPTION + " TEXT, "
             + PlaceContract.PlaceEntry.COLUMN_TYPE + " TEXT, "
-            + PlaceContract.PlaceEntry.COLUMN_IMAGES + " TEXT, "
             + PlaceContract.PlaceEntry.COLUMN_NAME + " TEXT NOT NULL, "
             + PlaceContract.PlaceEntry.COLUMN_POSITION + " VARCHAR);";
 
@@ -77,7 +76,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
     public SQLiteOpenHelperExtender(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-//        context.deleteDatabase(DATABASE_NAME);
+        context.deleteDatabase(DATABASE_NAME);
     }
 
 
@@ -105,35 +104,20 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertBitmap(Bitmap bm, String tableName, String columnName) {
+    public void insertBitmap(Bitmap bm, String columnName , ContentValues cv) {
 
         // Convert the image into byte array
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, out);
         byte[] buffer = out.toByteArray();
         // Open the database for writing
-        SQLiteDatabase db = this.getWritableDatabase();
         // Start the transaction.
-        db.beginTransaction();
-        ContentValues values;
 
         try {
-            values = new ContentValues();
-            values.put(columnName, buffer);
+            cv.put(columnName, buffer);
             // Insert Row
-            long i = db.insert(tableName, null, values);
-            Log.i("Insert", i + "");
-            // Insert into database successfully.
-            db.setTransactionSuccessful();
-
-        } catch (SQLiteException e) {
+        }catch (Exception e){
             e.printStackTrace();
-
-        } finally {
-            db.endTransaction();
-            // End the transaction.
-            db.close();
-            // Close database
         }
     }
 
@@ -182,8 +166,9 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             cv.put(UserContract.UserEntry.COLUMN_PHONE, phoneNumber);
             cv.put(UserContract.UserEntry.COLUMN_EMAIL, email);
             cv.put(UserContract.UserEntry.COLUMN_SCORE, 0);
+            insertBitmap(image,  UserContract.UserEntry.COLUMN_PROFILE_PICTURE , cv);
             db.insert(UserContract.UserEntry.TABLE_NAME, null, cv);
-            insertBitmap(image, UserContract.UserEntry.TABLE_NAME, UserContract.UserEntry.COLUMN_PROFILE_PICTURE);
+            Log.i(" ", "heeey sabt shod");
         }
     }
 
@@ -194,10 +179,11 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         cursor.moveToFirst();
         while (cursor != null) {
             try {
-                if (cursor.getString(0) == userName)
+                if (cursor.getString(0).equals(userName))
                     return true;
             }catch (Exception e){
-                return true;
+                return false;
+
             }
             cursor.moveToNext();
         }
@@ -209,7 +195,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT " + UserContract.UserEntry.COLUMN_PHONE + " FROM " + UserContract.UserEntry.TABLE_NAME, null);
         cursor.moveToFirst();
         while (cursor != null) {
-            if (cursor.getString(0) == userName)
+            if (cursor.getString(0).equals(userName))
                 return true;
             cursor.moveToNext();
         }
@@ -221,11 +207,20 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         if (checkForUserName(userName)) {
 
-            Cursor cursor = db.rawQuery("SELECT " + UserContract.UserEntry.COLUMN_PASS + ", " + UserContract.UserEntry._COLUMN_NAME + " FROM " + UserContract.UserEntry.TABLE_NAME + " WHERE " + UserContract.UserEntry._COLUMN_NAME + "= '" + userName + "' ," + UserContract.UserEntry.COLUMN_PASS + " = '" + pass + "'", null);
-            cursor.moveToFirst();
-            if (cursor.getColumnIndex(UserContract.UserEntry._COLUMN_NAME) != -1)
-                return true;
 
+            Cursor cursor = db.rawQuery("SELECT " + UserContract.UserEntry.COLUMN_PASS + " " +
+                    "FROM " + UserContract.UserEntry.TABLE_NAME + " " +
+                    "WHERE " + UserContract.UserEntry._COLUMN_NAME + "= '" + userName + "'", null);
+            if (cursor.moveToFirst() && cursor.getString(cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PASS)).equals(pass))
+                return true;
+            else{
+            cursor = db.rawQuery("SELECT " + UserContract.UserEntry.COLUMN_PASS + " " +
+                    "FROM " + UserContract.UserEntry.TABLE_NAME +
+                    " WHERE " + UserContract.UserEntry.COLUMN_PHONE + "= '" + userName + "'", null);
+
+                if (cursor.moveToFirst() &&cursor.getString(cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PASS)).equals(pass))
+                    return true;
+            }
 
         }
         return false;
@@ -233,17 +228,19 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
     public String giveUserName(String userName) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + UserContract.UserEntry._COLUMN_NAME + " FROM " + UserContract.UserEntry.TABLE_NAME, null);
-        cursor.moveToFirst();
-        while (cursor != null) {
-            if (cursor.getString(0) == userName)
+        String user = "";
+        Cursor cursor = db.rawQuery("SELECT " + UserContract.UserEntry._COLUMN_NAME +
+                " FROM " + UserContract.UserEntry.TABLE_NAME +
+                " WHERE " + UserContract.UserEntry._COLUMN_NAME + "= '" + userName+ "'", null);
+            if (cursor.moveToFirst())
                 return userName;
-            cursor.moveToNext();
+        cursor = db.rawQuery("SELECT " + UserContract.UserEntry._COLUMN_NAME +
+                " FROM " + UserContract.UserEntry.TABLE_NAME +
+                " WHERE " + UserContract.UserEntry.COLUMN_PHONE + "= '" + userName + "'", null);
+        if(cursor.moveToFirst()) {
+            user = cursor.getString(0);
         }
-        cursor = db.rawQuery("SELECT " + UserContract.UserEntry._COLUMN_NAME + " FROM " + UserContract.UserEntry.TABLE_NAME + " WHERE " + UserContract.UserEntry.COLUMN_PHONE + "= '" + userName + "'", null);
-        cursor.moveToFirst();
-        String s = cursor.getString(0);
-        return s;
+        return user;
     }
 
     public String getUserMail(String userName) {
@@ -264,19 +261,23 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + UserContract.UserEntry.TABLE_NAME + " WHERE " + UserContract.UserEntry._COLUMN_NAME + "= '" + userName + "'", null);
         HashMap map = new HashMap();
-        int i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_SCORE);
-        map.put("score", cursor.getString(i));
-        i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_EMAIL);
-        map.put("email", cursor.getString(i));
-        i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PASS);
-        map.put("pass", cursor.getString(i));
-        i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PHONE);
-        map.put("phone", cursor.getString(i));
-        i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_VISIBILITY);
-        map.put("visibility", cursor.getString(i));
-        map.put("image", getBitmap(UserContract.UserEntry.TABLE_NAME, UserContract.UserEntry.COLUMN_PROFILE_PICTURE));
-        i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_ADVENTURES);
-        map.put("adventures", cursor.getBlob(i));
+
+        if(cursor.moveToFirst()) {
+            int i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_SCORE);
+            map.put("score", cursor.getInt(i));
+            i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_EMAIL);
+            map.put("email", cursor.getString(i));
+            i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PASS);
+            map.put("pass", cursor.getString(i));
+            i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PHONE);
+            map.put("phone", cursor.getString(i));
+            i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_VISIBILITY);
+            map.put("visibility", cursor.getString(i));
+            map.put("image", getBitmap(UserContract.UserEntry.TABLE_NAME, UserContract.UserEntry.COLUMN_PROFILE_PICTURE));
+            i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_ADVENTURES);
+            map.put("adventures", cursor.getBlob(i));
+        }
+
         return map;
 
     }
@@ -359,14 +360,13 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
     }
 
 
-    public void insertPlace(String name, String describe, ArrayList<Bitmap> images, String position, String type) {
+    public void insertPlace(String name, String describe, String position, String type) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(PlaceContract.PlaceEntry.COLUMN_NAME, name);
         cv.put(PlaceContract.PlaceEntry.COLUMN_POSITION, position);
         cv.put(PlaceContract.PlaceEntry.COLUMN_TYPE, type);
         cv.put(PlaceContract.PlaceEntry.COLUMN_DESCRIPTION, describe);
-        cv.put(PlaceContract.PlaceEntry.COLUMN_IMAGES, arrayBitmapToJsonString(images));
         db.insert(PlaceContract.PlaceEntry.TABLE_NAME, null, cv);
 
     }
@@ -376,7 +376,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(FriendsContract.FriendsEntry.COLUMN_USER, userName);
         cv.put(FriendsContract.FriendsEntry.COLUMN_FRIEND, friend);
-        db.insert(UserAdventureContract.UserAdventureEntry.TABLE_NAME, null, cv);
+        db.insert(FriendsContract.FriendsEntry.TABLE_NAME, null, cv);
     }
 
     public ArrayList<String> getFriends(String userName) {
@@ -401,9 +401,6 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         map.put("name", cursor.getString(i));
         i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_TYPE);
         map.put("type", cursor.getString(i));
-        i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_IMAGES);
-        ArrayList<Bitmap> images = stringToBitmapArray(cursor.getString(i));
-        map.put("images", images);
 
         return map;
     }
@@ -445,12 +442,12 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         return jsonArr.toString();
     }
 
-public void insertImageArray(ArrayList<Bitmap> images){
-        for(int i=0;i<images.size();i++){
-            insertBitmap(images.get(i), PlaceImagesContract.PlaceImagesEntry.TABLE_NAME, PlaceImagesContract.PlaceImagesEntry.COLUMN_IMAGES);
-        }
-
-}
+//public void insertImageArray(ArrayList<Bitmap> images){
+//        for(int i=0;i<images.size();i++){
+//            insertBitmap(images.get(i), PlaceImagesContract.PlaceImagesEntry.TABLE_NAME, PlaceImagesContract.PlaceImagesEntry.COLUMN_IMAGES);
+//        }
+//
+//}
     public ArrayList<Bitmap> getImageArray(String places){
         ArrayList<Bitmap> arr = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
