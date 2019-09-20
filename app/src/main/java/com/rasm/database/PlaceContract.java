@@ -23,7 +23,6 @@ public class PlaceContract {
         public static final String COLUMN_TYPE = "type";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_DESCRIPTION = "description";
-        public static final String COLUMN_IMAGES = "images";
         public static final String COLUMN_POSITION = "position";
 
         public static final String TYPE_RESTAURANT = "restaurant";

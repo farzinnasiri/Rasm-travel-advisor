@@ -36,17 +36,17 @@ public class Administer {
         fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
         fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
 
-        database.insertPlace("حافظیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]",fakeImages,"", PlaceContract.PlaceEntry.TYPE_SHRINE);
-        database.insertPlace("سعدیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]",fakeImages,"", PlaceContract.PlaceEntry.TYPE_SHRINE);
-        database.insertPlace("کبکیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]",fakeImages,"", PlaceContract.PlaceEntry.TYPE_SHRINE);
-        database.insertPlace("جامنیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]",fakeImages,"", PlaceContract.PlaceEntry.TYPE_SHRINE);
-        database.insertPlace("اندرویدیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]",fakeImages,"", PlaceContract.PlaceEntry.TYPE_SHRINE);
+        database.insertPlace("حافظیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", PlaceContract.PlaceEntry.TYPE_SHRINE);
+        database.insertPlace("سعدیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", PlaceContract.PlaceEntry.TYPE_SHRINE);
+        database.insertPlace("کبکیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", PlaceContract.PlaceEntry.TYPE_SHRINE);
+        database.insertPlace("جامنیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", PlaceContract.PlaceEntry.TYPE_SHRINE);
+        database.insertPlace("اندرویدیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", PlaceContract.PlaceEntry.TYPE_SHRINE);
 
-        database.insertNewUser("سلام","salam ","09123341234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
-        database.insertNewUser("rgd","ddd ","09123345234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
-        database.insertNewUser("asd","fff ","0912336234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
-        database.insertNewUser("wer","salghham ","09111341234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
-        database.insertNewUser("uyt","saljjam ","09123341134","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+//        database.insertNewUser("سلام","salam ","09123341234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+//        database.insertNewUser("rgd","ddd ","09123345234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+//        database.insertNewUser("asd","fff ","0912336234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+//        database.insertNewUser("wer","salghham ","09111341234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+        database.insertNewUser("uyt","saljjam","09123341134","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
 
         database.insertNewFriend("rgd", "سلام");
         database.insertNewFriend("asd", "سلام");
@@ -133,8 +133,7 @@ public class Administer {
      */
     public boolean check_info_of_user_is_correct(String user_or_pass , String pass) {
 
-
-        return false;
+        return  database.userpassMatches(user_or_pass, pass);
     }
     public String getUsername(){
         return database.giveUserName(username);

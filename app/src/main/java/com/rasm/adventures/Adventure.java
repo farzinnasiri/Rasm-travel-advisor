@@ -2,7 +2,11 @@ package com.rasm.adventures;
 
 import android.graphics.Bitmap;
 
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.rasm.database.SQLiteOpenHelperExtender;
+
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 
 public class Adventure {
@@ -36,6 +40,7 @@ public class Adventure {
         id = (String)map.get("id");
         stream = (String)map.get("stream");
         descriptions = (String)map.get("description");
+        title = (String)map.get("title");
 //        images = SQLiteOpenHelperExtender.stringToBitmapArray((String) map.get("images"));
     }
 
