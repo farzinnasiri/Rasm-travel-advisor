@@ -187,7 +187,6 @@ public class Administer {
 
 
 
-
         return null;
     }
     public ArrayList<Place> getAllPlace(){

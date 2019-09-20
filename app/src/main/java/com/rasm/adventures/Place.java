@@ -14,12 +14,12 @@ public class Place {
     private ArrayList<Bitmap> images;
 
     public Place(HashMap map) {
-    this.images = map.get("images");
-    this.description = map.get("description");
-    this.name = map.get("name");
-    this.type = map.get("type");
-    this.location = map.get("position");
-
+    this.images = (ArrayList<Bitmap>) map.get("images");
+    this.descriptions =(String) map.get("description");
+    this.name = (String)map.get("name");
+    this.type = (String)map.get("type");
+    this.location = (String)map.get("position");
+    this.id =(String) map.get("id");
     }
 
     public Place(String name, String descriptions,String type, String location, ArrayList<Bitmap> images) {

@@ -400,12 +400,15 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         map.put("description", cursor.getString(i));
         i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_NAME);
         map.put("name", cursor.getString(i));
+        map.put("images",getImageArray((String) map.get("name")));
         i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_TYPE);
         map.put("type", cursor.getString(i));
+        i = cursor.getColumnIndex(PlaceContract.PlaceEntry._ID);
+        map.put("id", cursor.getString(i));
         map.put("position", position);
-        map.put("images",getPlaceImages(position) );
         return map;
     }
+
 
 
     public static ArrayList<Bitmap> stringToBitmapArray(String json) {
@@ -463,6 +466,11 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         }
         return arr;
     }
+
+
+
+
+
 
 
     public ArrayList<Place> getAllPlace() {
