@@ -1,10 +1,8 @@
 package com.rasm;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 import com.rasm.Administering.Administer;
 import com.rasm.adapters.NewFriendsAdventuresAdapter;
 import com.rasm.adapters.OptionsRecyclerViewAdapter;
+import com.rasm.adapters.SuggestedPlacesRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
@@ -90,8 +89,17 @@ public class MainActivity extends AppCompatActivity {
         newAdventuresRecyclerView.setAdapter(adapter2);
 
 
-        Administer.getInstance().getSuggestedPlace(4);
 
+
+        LinearLayoutManager suggestedPlacesLayoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL,false);
+        RecyclerView suggestedPlacesRecyclerView = findViewById(R.id.sugested_places_list);
+        suggestedPlacesRecyclerView.setLayoutManager(suggestedPlacesLayoutManager);
+        SuggestedPlacesRecyclerViewAdapter suggestedPlacesRecyclerViewAdapter =
+                new SuggestedPlacesRecyclerViewAdapter(this,Administer.getInstance()
+                        .getSuggestedPlace(4));
+
+        suggestedPlacesRecyclerView.setAdapter(suggestedPlacesRecyclerViewAdapter);
     }
 
 
