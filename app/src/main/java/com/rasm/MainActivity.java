@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rasm.Administering.Administer;
 import com.rasm.adapters.NewFriendsAdventuresAdapter;
 import com.rasm.adapters.OptionsRecyclerViewAdapter;
 
@@ -25,10 +26,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        initUI();
 
         initRecyclerViewers();
 
+
+    }
+
+    private void initUI() {
+       username = findViewById(R.id.dashboard_txt_username);
+
+
+        username.setText(Administer.getInstance().getUsername());
 
     }
 
