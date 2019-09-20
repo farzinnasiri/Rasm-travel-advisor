@@ -91,7 +91,12 @@ public class User {
 
     public  void addFriend(User friend){
         friends.add(friend);
+        friend.oneWayaddFriend(this);
     }
+    public  void oneWayaddFriend(User friend){
+        friends.add(friend);
+    }
+
 
     public void addAdventure(Adventure adventure){
         AdventuresId.add(adventure.getId());
