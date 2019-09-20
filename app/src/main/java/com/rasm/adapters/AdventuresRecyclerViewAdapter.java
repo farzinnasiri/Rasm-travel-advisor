@@ -1,12 +1,14 @@
 package com.rasm.adapters;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rasm.R;
@@ -27,6 +29,7 @@ public class AdventuresRecyclerViewAdapter extends
         this.mContext = mContext;
 
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,9 +42,11 @@ public class AdventuresRecyclerViewAdapter extends
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         viewHolder.username.setText(adventures.get(position).getUsername());
 
-//        viewHolder.title.setText(adventures.get(position).get);
+        viewHolder.title.setText(adventures.get(position).getTitle());
         viewHolder.desc.setText(adventures.get(position).getDescriptions());
-//        viewHolder.date.setText(adventures.get(position).);
+        viewHolder.date.setText(adventures.get(position).getDate());
+        viewHolder.imageView.setImageBitmap(adventures.get(position).getImages().get(0));
+
         viewHolder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +74,7 @@ public class AdventuresRecyclerViewAdapter extends
         TextView date;
         TextView desc;
         CircleImageView profilePhoto;
+        ImageView imageView;
 
 
 
@@ -76,10 +82,11 @@ public class AdventuresRecyclerViewAdapter extends
         super(itemView);
 
         card = itemView.findViewById(R.id.adventure_card);
-        date = itemView.findViewById(R.id.adventure_card);
-        username = itemView.findViewById(R.id.adventure_card);
-        title = itemView.findViewById(R.id.adventure_card);
+        date = itemView.findViewById(R.id.adventure_card_date);
+        username = itemView.findViewById(R.id.adventure_card_username);
+        title = itemView.findViewById(R.id.adventure_card_title);
         desc = itemView.findViewById(R.id.adventure_desc);
+        imageView = itemView.findViewById(R.id.adventure_card_place_photo);
         profilePhoto = itemView.findViewById(R.id.adventure_card_profile_photo);
     }
 }
