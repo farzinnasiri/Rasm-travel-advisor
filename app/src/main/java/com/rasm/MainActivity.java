@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 usersImages);
         newAdventuresRecyclerView.setAdapter(adapter2);
 
+
+        Administer.getInstance().getSuggestedPlace(4);
+
     }
 
 
