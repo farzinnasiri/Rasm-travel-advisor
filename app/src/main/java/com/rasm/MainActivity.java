@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRecyclerViewers() {
 
+        String username = Administer.getInstance().getUsername();
+
         ArrayList<String> titles = new ArrayList<>();
         titles.add("ماجراجویی");
         titles.add("تنظیمات");
@@ -100,11 +102,14 @@ public class MainActivity extends AppCompatActivity {
                 LinearLayoutManager.HORIZONTAL, false);
         RecyclerView newAdventuresRecyclerView = findViewById(R.id.new_adventures_list);
         newAdventuresRecyclerView.setLayoutManager(layoutManager1);
-        NewFriendsAdventuresAdapter adapter2 = new NewFriendsAdventuresAdapter(this, userNames,
-                newAdventuresTitles,
-                usersImages);
-        newAdventuresRecyclerView.setAdapter(adapter2);
 
+
+
+        NewFriendsAdventuresAdapter adapter2 = new NewFriendsAdventuresAdapter(
+                this,Administer.getInstance().getUserFriends(username));
+
+
+        newAdventuresRecyclerView.setAdapter(adapter2);
 
         ArrayList<Place> places = new ArrayList<>();
 
