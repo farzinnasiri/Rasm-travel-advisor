@@ -22,6 +22,13 @@ public class Administer {
 
     private Administer(){
         load_data();
+        insertFakeData();
+    }
+
+    private void insertFakeData() {
+//        database.insertPlace();
+
+
     }
 
     /*
@@ -56,7 +63,6 @@ public class Administer {
 
         updateData();
     }
-
     private void updateData() {
         update_to_storage();
     }
@@ -90,6 +96,9 @@ public class Administer {
 
         return false;
     }
+    public String getUsername(){
+        return database.giveUserName(username);
+    }
 
     /*
         check if the username exist or not
@@ -102,6 +111,10 @@ public class Administer {
     public ArrayList<Adventure> getUserAdventure(String username){
         return database.getUserAdventures(username);
     }
+//    getFriendsAdventure
+//    getSpecialAdventureByCondition
+
+
 
     public ArrayList<Place> getSuggestedPlace(int howMany){
 

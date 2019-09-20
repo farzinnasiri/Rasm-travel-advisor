@@ -8,6 +8,7 @@ import android.view.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.rasm.Administering.Administer;
 import com.rasm.adapters.NewFriendsAdventuresAdapter;
@@ -18,11 +19,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView avatar;
+    private TextView username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
         initRecyclerViewers();

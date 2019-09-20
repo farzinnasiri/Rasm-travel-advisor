@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if (v instanceof Button) {
             if(if_info_is_correct()) {
-               Administer.getInstance().setLoggedIn(true);
+               Administer.getInstance().setLoggedIn(true , user_or_phone_login.getText().toString() );
                 login();
             }
             else{
