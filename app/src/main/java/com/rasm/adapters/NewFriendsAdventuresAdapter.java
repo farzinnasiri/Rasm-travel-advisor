@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.rasm.Administering.Administer;
+import com.rasm.Administering.User;
 import com.rasm.R;
 
 import java.util.ArrayList;
@@ -22,18 +24,12 @@ public class NewFriendsAdventuresAdapter extends
     private static final String TAG = "NewFriendsAdventuresAdapter";
 
     //vars
-    private List<String> userNames = new ArrayList<>();
-    private List<String> adventureTitles = new ArrayList<>();
-    private List<Integer> profileImages = new ArrayList<>();
+    ArrayList<User> users;
     private Context mContext;
 
-    public NewFriendsAdventuresAdapter(Context context, ArrayList<String> userNames
-            , ArrayList<String> adventureTitles, ArrayList<Integer> profileImages) {
+    public NewFriendsAdventuresAdapter(Context context, ArrayList<User> users) {
 
-        this.userNames = userNames;
-        this.adventureTitles = adventureTitles;
-        this.profileImages = profileImages;
-
+        this.users = users;
         mContext = context;
     }
 
@@ -49,11 +45,12 @@ public class NewFriendsAdventuresAdapter extends
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(profileImages.get(position))
+                .load(users.get(position).getImage())
                 .into(holder.image);
 
-        holder.username.setText(userNames.get(position));
-        holder.title.setText(adventureTitles.get(position));
+        holder.username.setText(users.get(position).getUsername());
+        holder.title.setText(Administer.getInstance()
+                .getUserAdventure(users.get(position).getUsername()).get(0).getTitle());
 
 
         holder.image.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +63,7 @@ public class NewFriendsAdventuresAdapter extends
 
     @Override
     public int getItemCount() {
-        return profileImages.size();
+        return users.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
