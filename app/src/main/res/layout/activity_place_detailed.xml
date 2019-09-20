@@ -10,12 +10,12 @@ tools:context=".DetailedAdventureActivity">
 
 
 <android.support.v4.view.ViewPager
-    android:id="@+id/image_slider_viewer"
+    android:id="@+id/place_detailed_image_slider_viewer"
     android:layout_width="match_parent"
     android:layout_height="300dp" />
 
 <TextView
-    android:id="@+id/adventure_detailed_name"
+    android:id="@+id/place_detailed_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
@@ -26,31 +26,31 @@ tools:context=".DetailedAdventureActivity">
     />
 
 <RelativeLayout
-    android:id="@+id/adventure_detailed_user"
+    android:id="@+id/place_detailed_user"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:layout_below="@+id/adventure_detailed_user"
+    android:layout_below="@+id/place_detailed_user"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:padding="3dp">
 
     <TextView
-        android:id="@+id/adventure_detailed_username"
+        android:id="@+id/place_detailed_username"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginRight="8dp"
-        android:layout_toLeftOf="@+id/adventure_card_profile_photo"
+        android:layout_toLeftOf="@+id/place_detailed_card_profile_photo"
         android:gravity="center_vertical"
         android:text="موقعیت:"
         android:textColor="#313031"
         android:textSize="13sp" />
 
     <TextView
-        android:id="@+id/adventure_detailed_date"
+        android:id="@+id/place_detailed_date"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/adventure_detailed_condition"
+        android:layout_toLeftOf="@+id/place_detailed_condition"
         android:gravity="center_vertical|left"
         android:paddingLeft="12dp"
         android:text="دسته"
@@ -58,19 +58,19 @@ tools:context=".DetailedAdventureActivity">
         android:textSize="13sp" />
 
     <TextView
-        android:id="@+id/adventure_detailed_condition"
+        android:id="@+id/place_detailed_condition"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@id/adventure_detailed_username"
+        android:layout_toLeftOf="@id/place_detailed_username"
         android:gravity="center_vertical"
         android:text="تهران - نیاوران"
         android:textColor="@color/green"
         android:textSize="13sp" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/adventure_card_profile_photo"
+        android:id="@+id/place_detailed_card_profile_photo"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_alignParentRight="true"
@@ -83,7 +83,7 @@ tools:context=".DetailedAdventureActivity">
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/adventure_detailed_desc"
+        android:id="@+id/place_detailed_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
