@@ -8,33 +8,35 @@ import java.util.HashMap;
 
 public class Place {
 
-    private String descriptions, id, title;
-    private ArrayList<Integer> images;
+    private String descriptions, id, name;
+    private String type;
+    private String location;
+    private ArrayList<Bitmap> images;
 
     public Place(HashMap map) {
 
-//        initializeFields(map);
-//        orderDescriptionsWithImages();
 
     }
 
-    public Place(String title, String descriptions, ArrayList<Integer> images) {
+    public Place(String name, String descriptions,String type, String location, ArrayList<Bitmap> images) {
 
         this.images = images;
         this.descriptions = descriptions;
-        this.title = title;
+        this.name = name;
+        this.type = type;
+        this.location = location;
     }
 
     private void initializeFields(HashMap map) {
 
     }
 
-    public ArrayList<Integer> getPictures() {
+    public ArrayList<Bitmap> getPictures() {
         return images;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     public String getDescriptions() {
@@ -53,15 +55,15 @@ public class Place {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public ArrayList<Integer> getImages() {
+    public ArrayList<Bitmap> getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<Integer> images) {
+    public void setImages(ArrayList<Bitmap> images) {
         this.images = images;
     }
 }
