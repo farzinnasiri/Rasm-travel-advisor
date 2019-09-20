@@ -9,6 +9,15 @@ public class User {
     private String username , score , email , phone , pass;
             private int visibility;
     private ArrayList<User> friends;
+
+    public ArrayList<Integer> getAdventuresId() {
+        return AdventuresId;
+    }
+
+    public void setAdventuresId(ArrayList<Integer> adventuresId) {
+        AdventuresId = adventuresId;
+    }
+
     private ArrayList<Integer> AdventuresId;
     private int image;
 

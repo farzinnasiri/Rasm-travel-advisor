@@ -27,7 +27,6 @@ public class Administer {
     private ArrayList<Adventure> adventures = new ArrayList<>();
     private ArrayList<Place> places = new ArrayList<>();
 
-    private SQLiteOpenHelperExtender database;
 
     private Administer(){
         load_data();
@@ -99,12 +98,8 @@ public class Administer {
          */
     private void load_data() {
         load_from_storage();
-        load_from_database();
     }
 
-    private void load_from_database() {
-        database = new SQLiteOpenHelperExtender(context);
-    }
 
     private void load_from_storage() {
 
@@ -128,8 +123,8 @@ public class Administer {
 
         updateData();
     }
-    public void insertNewUser(String username, String password, String phone, String s, Bitmap bitmap) {
-    database.insertNewUser(username, password,phone,s,bitmap);
+    public void addNewUser(String username, String score, String email, String phone, String pass, int visibility, ArrayList<User> friends, int image , ArrayList<Integer> AdventuresId) {
+        users.add(new User(username , score , email ,phone , pass , visibility, friends ,  image , AdventuresId));
     }
 
 
@@ -162,11 +157,14 @@ public class Administer {
         are correct or not!
      */
     public boolean check_info_of_user_is_correct(String user_or_pass , String pass) {
+        try {
 
-        return  database.userpassMatches(user_or_pass, pass);
+        return getUser(user_or_pass).getPass().equals(pass);
+        }catch (Exception e){
+            return false;
+        }
     }
     public String getUsername(){
-        username = database.giveUserName(username);
         update_to_storage();
         return username;
     }
@@ -180,7 +178,10 @@ public class Administer {
     }
 
     public ArrayList<Adventure> getUserAdventure(String username){
-        return database.getUserAdventures(username);
+        ArrayList<Adventure> adventures = new ArrayList<>();
+
+        for(Integer)
+
     }
     public HashMap getUserDatas(String username){
       return  database.getUserDatas(username);
@@ -213,12 +214,9 @@ public class Administer {
 
 
 
-    public ArrayList<Place> getSuggestedPlace(int howMany){
+    public ArrayList<Place> getSuggestedPlace(){
 
-
-
-
-        return null;
+        return places;
     }
     public ArrayList<Place> getAllPlace(){
         return database.getAllPlace();
