@@ -74,18 +74,35 @@ public class AllAdventuresFragment extends Fragment {
         ArrayList<Adventure> adventuresList = new ArrayList<>();
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.drawable.image);
-        adventuresList.add(new Adventure("رضا القاسی زاده",
+        adventuresList.add(new Adventure(1,
                 "یه روز خوب در شاه چراغ",
                 "امروز","سفری بود فوق العاده به همراه دوستان خوبم",images));
-        adventuresList.add(new Adventure("محمد فرزین",
+        adventuresList.add(new Adventure(2,
                 "یک هفته در شیراز",
                 "دیروز","مدت ها بود که به این شهر سفر نکرده بودم",images));
-        adventuresList.add(new Adventure("بردیا چهارتار",
+        adventuresList.add(new Adventure(3,
+                "تور جهان نما",
+                "امروز","تور ش برنامه های خیلی خوبی داشت با قیمت مناسب... پیشنهاد میکنم",images));
+        adventuresList.add(new Adventure(4,
+                "بهشت گمشده",
+                "چند روز پیش","متاسفانه طبیعتش دیگه به اون بکری سابق نبود",images));
+        adventuresList.add(new Adventure(5,
                 "وان،شهری فوق العاده دیدنی",
                 "هفته پیش","استراحتی بود که بهش نیاز داشتم",images));
-        adventuresList.add(new Adventure("کاوه پورمقام",
-                "ماه عسل در جزایر قناری",
-                "ماه پیش","بهترین هفته زندگیم",images));
+        adventuresList.add(new Adventure(6,
+                "یک هفته جزایر قشم",
+                "این هفته","بهترین هفته زندگیم",images));
+        adventuresList.add(new Adventure(7,
+                "غار بورنیک",
+                "پریروز","یه همچین  حالتی داشتیم ما توی این چن روز",images));
+        adventuresList.add(new Adventure(8,
+                "کوه سولقان",
+                "امروز","خیلی خوش گذشت جای اقا پرویز خالی",images));
+        adventuresList.add(new Adventure(9,
+                "چرا عاقل چرا عاقل",
+                "امروز","چرا عاقل کند کاری که باز آرد پشیمانی",images));
+
+
 
         AdventuresRecyclerViewAdapter adventuresRecyclerViewAdapter =
                 new AdventuresRecyclerViewAdapter(getContext(),adventuresList);

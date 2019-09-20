@@ -47,7 +47,13 @@ public class Administer {
         places.add(new Place("جامنیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", "تهران" , fakeImages));
         places.add(new Place("اندرویدیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", "یزد" , fakeImages));
 
-
+        users.add(new User("علی","123","ali@yahoo.com","09120177645", "aliguli", 0,new ArrayList<User>(),0,new ArrayList<Integer>()));
+        users.add(new User("قلی","323","gholi97@gmail.com","09306056534", "gholiguli", 1,new ArrayList<User>(),0,new ArrayList<Integer>()));
+        users.add(new User("تقی","54565","taghi@gmail.com","09126745098", "taghiguli", 2,new ArrayList<User>(),0,new ArrayList<Integer>()));
+        users.add(new User("نقی","10","naghi@gmail.com","09182345876", "naghiguli", 2,new ArrayList<User>(),0,new ArrayList<Integer>()));
+        users.add(new User("شقی","23","sharali123@yahoo.com","09351458745", "shaghiguli", 1,new ArrayList<User>(),0,new ArrayList<Integer>()));
+        users.add(new User("گری","777","sh3i123@yahoo.com","09128768876", "gareguri", 0,new ArrayList<User>(),0,new ArrayList<Integer>()));
+        users.add(new User("سری","678","sasdfd@yahoo.com","091887634987", "sariguli", 1,new ArrayList<User>(),0,new ArrayList<Integer>()));
 
 //        database.insertNewUser("سلام","salam ","09123341234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
 //        database.insertNewUser("rgd","ddd ","09123345234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
