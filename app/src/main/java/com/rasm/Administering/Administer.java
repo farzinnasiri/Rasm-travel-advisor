@@ -186,9 +186,7 @@ public class Administer {
       return  database.getUserDatas(username);
     }
 
-    public ArrayList<String> getUserFriends(String username){
-        return database.getFriends(username);
-    }
+
 
 
     public ArrayList<Adventure> getFriendsAdventure(String username){
@@ -238,5 +236,9 @@ public class Administer {
 
 
         return null;
+    }
+
+    public ArrayList<User> getUserFriends(String username){
+        return getUser(username).getFriends();
     }
 }
