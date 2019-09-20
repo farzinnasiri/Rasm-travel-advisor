@@ -2,6 +2,7 @@ package com.rasm;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -105,15 +106,16 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Place> places = new ArrayList<>();
 
-        ArrayList<Integer> images = new ArrayList<Integer>();
-        images.add(R.drawable.image);
+        ArrayList<Bitmap> images = new ArrayList<Bitmap>();
+        images.add(BitmapFactory.decodeResource(this.getResources(),
+                R.drawable.image));
 
-        places.add(new Place("تخت جمشید","یک جای خیلی باحالا با کلی چیز میز قدیمی",images));
-        places.add(new Place("آرامگاه سعدی","شیخ اجل سعدی",images));
-        places.add(new Place("آرامگاه حافظ","لسان الغیب شیرازی",images));
-        places.add(new Place("پل طبیعت","یک پل فوق العاده",images));
-        places.add(new Place("تلکابین رامسر","تلکابین سواری در شمال کشور",images));
-        places.add(new Place("کیش","فوق العاده ترین جزیره ایران",images));
+        places.add(new Place("تخت جمشید","یک جای خیلی باحالا با کلی چیز میز قدیمی","آثار باستانی","شیراز",images));
+        places.add(new Place("آرامگاه سعدی","شیخ اجل سعدی","آثار باستانی","شیراز",images));
+        places.add(new Place("آرامگاه حافظ","لسان الغیب شیرازی","آثار باستانی","شیراز",images));
+        places.add(new Place("پل طبیعت","یک پل فوق العاده","مکان دیدنی","تهران",images));
+        places.add(new Place("تلکابین رامسر","تلکابین سواری در شمال کشور","طبیعت گردی","مازندارن",images));
+        places.add(new Place("کیش","فوق العاده ترین جزیره ایران","استراحتی","جزیره کیش",images));
 
         LinearLayoutManager suggestedPlacesLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL,false);

@@ -1,5 +1,7 @@
 package com.rasm.adventures;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,14 +11,14 @@ public class Place {
     private String descriptions, id, name;
     private String type;
     private String location;
-    private ArrayList<Integer> images;
+    private ArrayList<Bitmap> images;
 
     public Place(HashMap map) {
 
 
     }
 
-    public Place(String name, String descriptions,String type, String location, ArrayList<Integer> images) {
+    public Place(String name, String descriptions,String type, String location, ArrayList<Bitmap> images) {
 
         this.images = images;
         this.descriptions = descriptions;
@@ -29,7 +31,7 @@ public class Place {
 
     }
 
-    public ArrayList<Integer> getPictures() {
+    public ArrayList<Bitmap> getPictures() {
         return images;
     }
 
@@ -57,11 +59,11 @@ public class Place {
         this.name = name;
     }
 
-    public ArrayList<Integer> getImages() {
+    public ArrayList<Bitmap> getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<Integer> images) {
+    public void setImages(ArrayList<Bitmap> images) {
         this.images = images;
     }
 }
