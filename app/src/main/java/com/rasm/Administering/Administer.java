@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.rasm.adventures.Adventure;
+import com.rasm.adventures.Place;
 import com.rasm.database.SQLiteOpenHelperExtender;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class Administer {
 
     public void setLoggedIn(boolean isLoggedIn){
         this.isLoggedIn = isLoggedIn;
+
         updateData();
     }
 
@@ -98,7 +100,13 @@ public class Administer {
     }
 
     public ArrayList<Adventure> getUserAdventure(String username){
+        return database.getUserAdventures(username);
+    }
 
+    public ArrayList<Place> getSuggestedPlace(int howMany){
+
+
+        return null;
     }
 
 }

@@ -1,6 +1,8 @@
 package com.rasm.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.rasm.ExploreAdventuresActivity;
 import com.rasm.R;
+import com.rasm.UserProfileSettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +53,18 @@ public class OptionsRecyclerViewAdapter extends RecyclerView.Adapter<OptionsRecy
 
         holder.name.setText(titles.get(position));
 
-        holder.image.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //Do something
+            public void onClick(View v) {
+                if(titles.get(position).equals("ماجراجویی")){
+                    Intent intent = new Intent(mContext, ExploreAdventuresActivity.class);
+                    mContext.startActivity(intent);
+                }
+                else if(titles.get(position).equals("تنظیمات")){
+                    Intent intent = new Intent(mContext, UserProfileSettingsActivity.class);
+                    mContext.startActivity(intent);
+                }
+
             }
         });
     }
@@ -68,11 +80,13 @@ public class OptionsRecyclerViewAdapter extends RecyclerView.Adapter<OptionsRecy
 
         ImageView image;
         TextView name;
+        CardView cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.option_image);
             name = itemView.findViewById(R.id.option_title);
+            cardView = itemView.findViewById(R.id.option_card);
         }
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#3366cc"
     android:orientation="vertical"
-    tools:context=".UserProfileActivity">
+    tools:context=".UserProfileSettingsActivity">
 
     <RelativeLayout
         android:id="@+id/dashboard_profile_layout"
