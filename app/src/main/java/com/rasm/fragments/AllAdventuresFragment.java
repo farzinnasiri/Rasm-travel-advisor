@@ -93,6 +93,9 @@ public class AllAdventuresFragment extends Fragment {
 
         adventures.setAdapter(adventuresRecyclerViewAdapter);
 
+
+
+
         return view;
     }
 
