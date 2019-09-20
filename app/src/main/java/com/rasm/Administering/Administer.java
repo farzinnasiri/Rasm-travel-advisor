@@ -55,6 +55,35 @@ public class Administer {
         users.add(new User("گری","777","sh3i123@yahoo.com","09128768876", "gareguri", 0,new ArrayList<User>(),0,new ArrayList<Integer>()));
         users.add(new User("سری","678","sasdfd@yahoo.com","091887634987", "sariguli", 1,new ArrayList<User>(),0,new ArrayList<Integer>()));
 
+        ArrayList<Integer> images = new ArrayList<>();
+        images.add(R.drawable.image);
+        adventures.add(new Adventure(1,
+                "یه روز خوب در شاه چراغ",
+                "امروز","سفری بود فوق العاده به همراه دوستان خوبم",images));
+        adventures.add(new Adventure(2,
+                "یک هفته در شیراز",
+                "دیروز","مدت ها بود که به این شهر سفر نکرده بودم",images));
+        adventures.add(new Adventure(3,
+                "تور جهان نما",
+                "امروز","تور ش برنامه های خیلی خوبی داشت با قیمت مناسب... پیشنهاد میکنم",images));
+        adventures.add(new Adventure(4,
+                "بهشت گمشده",
+                "چند روز پیش","متاسفانه طبیعتش دیگه به اون بکری سابق نبود",images));
+        adventures.add(new Adventure(5,
+                "وان،شهری فوق العاده دیدنی",
+                "هفته پیش","استراحتی بود که بهش نیاز داشتم",images));
+        adventures.add(new Adventure(6,
+                "یک هفته جزایر قشم",
+                "این هفته","بهترین هفته زندگیم",images));
+        adventures.add(new Adventure(7,
+                "غار بورنیک",
+                "پریروز","یه همچین  حالتی داشتیم ما توی این چن روز",images));
+        adventures.add(new Adventure(8,
+                "کوه سولقان",
+                "امروز","خیلی خوش گذشت جای اقا پرویز خالی",images));
+        adventures.add(new Adventure(9,
+                "چرا عاقل چرا عاقل",
+                "امروز","چرا عاقل کند کاری که باز آرد پشیمانی",images));
 
        addFakeFriends();
        addFakeAdventures();
@@ -79,6 +108,22 @@ public class Administer {
     }
 
     private void addFakeAdventures() {
+        users.get(0).addAdventure(adventures.get(0));
+        users.get(0).addAdventure(adventures.get(1));
+        users.get(0).addAdventure(adventures.get(2));
+        users.get(1).addAdventure(adventures.get(3));
+        users.get(1).addAdventure(adventures.get(4));
+        users.get(1).addAdventure(adventures.get(5));
+        users.get(2).addAdventure(adventures.get(6));
+        users.get(2).addAdventure(adventures.get(7));
+        users.get(2).addAdventure(adventures.get(8));
+        users.get(3).addAdventure(adventures.get(0));
+        users.get(3).addAdventure(adventures.get(4));
+        users.get(4).addAdventure(adventures.get(5));
+        users.get(4).addAdventure(adventures.get(6));
+        users.get(5).addAdventure(adventures.get(7));
+        users.get(5).addAdventure(adventures.get(8));
+        users.get(6).addAdventure(adventures.get(1));
 
     }
 
