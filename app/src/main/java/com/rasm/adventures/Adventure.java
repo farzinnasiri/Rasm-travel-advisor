@@ -23,12 +23,12 @@ public class Adventure {
     private String date;
 
     private String descriptions;
-    private String id ;
+    private int id ;
     private int condition, style,visibility;
-    private ArrayList<Bitmap> images;
+    private ArrayList<Integer> images;
 
     public Adventure(String username, String title, String date, String descriptions,
-                     ArrayList<Bitmap> images) {
+                     ArrayList<Integer> images) {
         this.username = username;
         this.title = title;
         this.date = date;
@@ -36,25 +36,9 @@ public class Adventure {
         this.images = images;
     }
 
-    public Adventure(HashMap map){
-
-        initializeFields(map);
-//        orderDescriptionsWithImages();
-
-    }
 
 
-    private void initializeFields(HashMap map) {
 
-        condition = (int)map.get("condition");
-        style = (int)map.get("style");
-        visibility = (int)map.get("style");
-        username = (String)map.get("username");
-        id = (String)map.get("id");
-        stream = (String)map.get("stream");
-        descriptions = (String)map.get("description");
-        title = (String)map.get("title");
-    }
 
     public int getCondition() {
         return condition;
@@ -68,11 +52,11 @@ public class Adventure {
         return descriptions;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public ArrayList<Bitmap> getImages() {
+    public ArrayList<Integer> getImages() {
         return images;
     }
 
@@ -95,11 +79,11 @@ public class Adventure {
         this.descriptions = descriptions;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public void setImages(ArrayList<Bitmap> images) {
+    public void setImages(ArrayList<Integer> images) {
         this.images = images;
     }
 
