@@ -1,8 +1,11 @@
 package com.rasm;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -14,11 +17,13 @@ import com.rasm.adapters.OptionsRecyclerViewAdapter;
 import com.rasm.adapters.SuggestedPlacesRecyclerViewAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
     private ImageView avatar;
     private TextView username;
+    private TextView score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +39,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void initUI() {
        username = findViewById(R.id.dashboard_txt_username);
+        avatar = findViewById(R.id.dashboard_user_photo);
+        score = findViewById(R.id.dashboard_txt_points);
+
+
+
+        HashMap userData = Administer.getInstance().getUserDatas(username.getText().toString());
+
 
 
         username.setText(Administer.getInstance().getUsername());
-
+        avatar.setImageBitmap((Bitmap) (userData.get("image")));
+        score.setText((String)(userData.get("score")));
     }
 
 

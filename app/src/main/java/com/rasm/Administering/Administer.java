@@ -151,7 +151,7 @@ public class Administer {
     public ArrayList<Adventure> getUserAdventure(String username){
         return database.getUserAdventures(username);
     }
-    public HashMap getUserDatas(){
+    public HashMap getUserDatas(String username){
       return  database.getUserDatas(username);
     }
 //    getFriendsAdventure
