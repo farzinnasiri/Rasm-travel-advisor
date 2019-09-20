@@ -6,7 +6,7 @@ public class FriendsContract {
     private FriendsContract() {
     }
 
-    public static final class FriendsContractEntry implements BaseColumns {
+    public static final class FriendsEntry implements BaseColumns {
 
         public static final String TABLE_NAME = "user-friends";
 

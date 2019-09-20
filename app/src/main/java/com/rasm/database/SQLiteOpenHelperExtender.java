@@ -61,6 +61,10 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             +  PlaceContract.PlaceEntry.COLUMN_NAME + " TEXT NOT NULL, "
             + PlaceContract.PlaceEntry.COLUMN_POSITION + " VARCHAR);";
 
+    private static final String SQL_CREATE_ENTRIES_FRIENDS = "CREATE TABLE " + FriendsContract.FriendsEntry.TABLE_NAME + " ("
+            + FriendsContract.FriendsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +  FriendsContract.FriendsEntry.COLUMN_FRIEND + " TEXT NOT NULL CASCADE ON DELETE CASCADE ON UPDATE, "
+            + FriendsContract.FriendsEntry.COLUMN_USER + " TEXT NOT NULL CASCADE ON DELETE CASCADE ON UPDATE);";
 
     public SQLiteOpenHelperExtender(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -73,6 +77,8 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_ENTRIES_USERS);
         db.execSQL(SQL_CREATE_ENTRIES_USER_ADVENTURE);
         db.execSQL(SQL_CREATE_ENTRIES_PLACES);
+        db.execSQL(SQL_CREATE_ENTRIES_FRIENDS);
+
     }
 
     @Override
@@ -81,6 +87,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + UserContract.UserEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + UserAdventureContract.UserAdventureEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + PlaceContract.PlaceEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + FriendsContract.FriendsEntry.TABLE_NAME);
 
         onCreate(db);
     }
@@ -329,59 +336,67 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         db.insert(UserContract.UserEntry.TABLE_NAME, null, cv);
 
     }
-    public HashMap getPlaceDatas(String position){
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + PlaceContract.PlaceEntry.TABLE_NAME +" WHERE "+ PlaceContract.PlaceEntry.COLUMN_POSITION+"= '"+position+"'", null);
-        HashMap map = new HashMap();
-        int i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_DESCRIPTION);
-        map.put("description", cursor.getString(i));
-        i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_NAME);
-        map.put("name", cursor.getString(i));
-        i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_TYPE);
-        map.put("type", cursor.getString(i));
-        i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_IMAGES);
-        ArrayList<Bitmap> images = stringToBitmapArray(cursor.getString(i));
-        map.put("images",images);
 
-        return map;
+    public void insertNewFriend(String friend, String userName) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(FriendsContract.FriendsEntry.COLUMN_USER, userName);
+        cv.put(FriendsContract.FriendsEntry.COLUMN_FRIEND, friend);
+        db.insert(UserAdventureContract.UserAdventureEntry.TABLE_NAME, null, cv);
     }
+        public HashMap getPlaceDatas(String position){
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM " + PlaceContract.PlaceEntry.TABLE_NAME + " WHERE " + PlaceContract.PlaceEntry.COLUMN_POSITION + "= '" + position + "'", null);
+            HashMap map = new HashMap();
+            int i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_DESCRIPTION);
+            map.put("description", cursor.getString(i));
+            i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_NAME);
+            map.put("name", cursor.getString(i));
+            i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_TYPE);
+            map.put("type", cursor.getString(i));
+            i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_IMAGES);
+            ArrayList<Bitmap> images = stringToBitmapArray(cursor.getString(i));
+            map.put("images", images);
 
-
-
-    public static ArrayList<Bitmap> stringToBitmapArray(String json) {
-        JSONArray jsonArr = null;
-        ArrayList<Bitmap> images = new ArrayList<Bitmap>();
-        try {
-            jsonArr = new JSONArray(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
+            return map;
         }
-        for(int i =0;i<jsonArr.length();i++){
-            byte[] bytes = null;
-            Bitmap bitmap = null;
+
+
+        public static ArrayList<Bitmap> stringToBitmapArray(String json){
+            JSONArray jsonArr = null;
+            ArrayList<Bitmap> images = new ArrayList<Bitmap>();
             try {
-                String str = (String)jsonArr.get(i);
-                bytes = str.getBytes(Charset.forName("UTF-8"));
+                jsonArr = new JSONArray(json);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            images.add(bitmap);
+            for (int i = 0; i < jsonArr.length(); i++) {
+                byte[] bytes = null;
+                Bitmap bitmap = null;
+                try {
+                    String str = (String) jsonArr.get(i);
+                    bytes = str.getBytes(Charset.forName("UTF-8"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                images.add(bitmap);
+            }
+
+            return images;
         }
 
-        return  images;
-    }
+        public static String arrayBitmapToJsonString(ArrayList < Bitmap > images) {
+            JSONArray jsonArr = new JSONArray();
+            for (int i = 0; i < images.size(); i++) {
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                images.get(i).compress(Bitmap.CompressFormat.PNG, 100, out);
+                byte[] buffer = out.toByteArray();
+                String s = new String(buffer, Charset.forName("UTF-8"));
+                jsonArr.put(s);
+            }
+            return jsonArr.toString();
+        }
 
-    public static String arrayBitmapToJsonString(ArrayList<Bitmap> images){
-    JSONArray jsonArr = new JSONArray();
-    for(int i=0;i<images.size();i++){
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        images.get(i).compress(Bitmap.CompressFormat.PNG, 100, out);
-        byte[] buffer = out.toByteArray();
-        String s = new String(buffer, Charset.forName("UTF-8"));
-        jsonArr.put(s);
-    }
-    return jsonArr.toString();
-    }
 
-}
+    }
