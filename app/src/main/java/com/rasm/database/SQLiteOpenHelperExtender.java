@@ -105,7 +105,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertBitmap(Bitmap bm, String columnName , ContentValues cv) {
+    public ContentValues insertBitmap(Bitmap bm, String columnName , ContentValues cv) {
 
         // Convert the image into byte array
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -120,6 +120,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         }catch (Exception e){
             e.printStackTrace();
         }
+        return  cv;
     }
 
 
@@ -167,7 +168,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             cv.put(UserContract.UserEntry.COLUMN_PHONE, phoneNumber);
             cv.put(UserContract.UserEntry.COLUMN_EMAIL, email);
             cv.put(UserContract.UserEntry.COLUMN_SCORE, 0);
-            insertBitmap(image,  UserContract.UserEntry.COLUMN_PROFILE_PICTURE , cv);
+            cv = insertBitmap(image,  UserContract.UserEntry.COLUMN_PROFILE_PICTURE , cv);
             db.insert(UserContract.UserEntry.TABLE_NAME, null, cv);
             Log.i(" ", "heeey sabt shod");
         }
@@ -260,10 +261,13 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
     public HashMap getUserDatas(String userName) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + UserContract.UserEntry.TABLE_NAME + " WHERE " + UserContract.UserEntry._COLUMN_NAME + "= '" + userName + "'", null);
+        //Cursor cursor = db.rawQuery("SELECT * FROM " + UserContract.UserEntry.TABLE_NAME + " WHERE " + UserContract.UserEntry._COLUMN_NAME + " = '" + userName + "'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + UserContract.UserEntry.TABLE_NAME,null);
         HashMap map = new HashMap();
-
+        checkForUserName(userName);
+//        Log.i("" , "              " + "'" + cursor.moveToFirst() + "'");
         if(cursor.moveToFirst()) {
+        Log.i("" , "  hjfjhfjhfjhfjfjhfjyf   " + cursor.getCount());
             int i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_SCORE);
             map.put("score", cursor.getInt(i));
             i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_EMAIL);
@@ -302,25 +306,27 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + AdventureContract.AdventureEntry.TABLE_NAME + " WHERE " + AdventureContract.AdventureEntry._ID + "= '" + advId + "'", null);
         HashMap map = new HashMap();
-        int i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_CONDITION);
-        map.put("condition", cursor.getInt(i));
-        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_DESCRIPTIONS);
-        map.put("description", cursor.getString(i));
-        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_STREAM);
-        map.put("stream", cursor.getString(i));
-        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_STYLE);
-        map.put("style", cursor.getInt(i));
-        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_VISIBILITY);
-        map.put("visibility", cursor.getInt(i));
-        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_USER);
-        map.put("user", cursor.getString(i));
-        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_TIME_START);
-        map.put("start", cursor.getString(i));
-        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_TIME_END);
-        map.put("end", cursor.getString(i));
-        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_IMAGES);
-        map.put("images", stringToBitmapArray(cursor.getString(i)));
-        map.put("id", advId);
+        if(cursor.moveToFirst()) {
+            int i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_CONDITION);
+            map.put("condition", cursor.getInt(i));
+            i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_DESCRIPTIONS);
+            map.put("description", cursor.getString(i));
+            i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_STREAM);
+            map.put("stream", cursor.getString(i));
+            i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_STYLE);
+            map.put("style", cursor.getInt(i));
+            i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_VISIBILITY);
+            map.put("visibility", cursor.getInt(i));
+            i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_USER);
+            map.put("user", cursor.getString(i));
+            i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_TIME_START);
+            map.put("start", cursor.getString(i));
+            i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_TIME_END);
+            map.put("end", cursor.getString(i));
+            i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_IMAGES);
+            map.put("images", stringToBitmapArray(cursor.getString(i)));
+            map.put("id", advId);
+        }
         return map;
 
     }

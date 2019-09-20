@@ -23,6 +23,10 @@ public class Administer {
     private boolean isLoggedIn;
     private String username;
 
+    private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<Adventure> adventures = new ArrayList<>();
+    private ArrayList<Place> places = new ArrayList<>();
+
     private SQLiteOpenHelperExtender database;
 
     private Administer(){
@@ -31,16 +35,18 @@ public class Administer {
     }
 
     private void insertFakeData() {
-        ArrayList<Bitmap> fakeImages = new ArrayList<>();
-        fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
-        fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
-        fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
-
-        database.insertPlace("حافظیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", PlaceContract.PlaceEntry.TYPE_SHRINE);
+        ArrayList<Integer> fakeImages = new ArrayList<>();
+//        fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+//        fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+//        fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+        fakeImages.add(R.drawable.image);
+        places.add(new Place("حافظیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","","شیراز" , fakeImages));
         database.insertPlace("سعدیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", PlaceContract.PlaceEntry.TYPE_SHRINE);
         database.insertPlace("کبکیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", PlaceContract.PlaceEntry.TYPE_SHRINE);
         database.insertPlace("جامنیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", PlaceContract.PlaceEntry.TYPE_SHRINE);
         database.insertPlace("اندرویدیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]","", PlaceContract.PlaceEntry.TYPE_SHRINE);
+
+
 
 //        database.insertNewUser("سلام","salam ","09123341234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
 //        database.insertNewUser("rgd","ddd ","09123345234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
@@ -87,12 +93,8 @@ public class Administer {
         return  isLoggedIn;
     }
 
-    public void setLoggedIn(boolean isLoggedIn){
-        this.isLoggedIn = isLoggedIn;
 
-        updateData();
-    }
-    public void setLoggedIn(boolean isLoggedIn, String uesrName){
+    public void setLoggedIn(boolean isLoggedIn, String username){
         this.isLoggedIn = isLoggedIn;
         this.username = username;
 
@@ -136,7 +138,9 @@ public class Administer {
         return  database.userpassMatches(user_or_pass, pass);
     }
     public String getUsername(){
-        return database.giveUserName(username);
+        username = database.giveUserName(username);
+        update_to_storage();
+        return username;
     }
 
     /*
