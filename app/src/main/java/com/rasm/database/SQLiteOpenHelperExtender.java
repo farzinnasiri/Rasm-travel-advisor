@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.rasm.adventures.Adventure;
+import com.rasm.adventures.Place;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -401,7 +402,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         map.put("name", cursor.getString(i));
         i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_TYPE);
         map.put("type", cursor.getString(i));
-
+        map.put("position", position);
         return map;
     }
 
@@ -458,6 +459,20 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             arr.add(BitmapFactory.decodeByteArray(blob, 0, blob.length));
             cursor.moveToNext();
 
+        }
+        return arr;
+    }
+
+
+    public ArrayList<Place> getAllPlace() {
+        ArrayList<Place> arr = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + PlaceContract.PlaceEntry.TABLE_NAME , null);
+        cursor.moveToFirst();
+        while(cursor!=null){
+            arr.add(new Place(getPlaceDatas(cursor.getString(cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_POSITION)))));
+            cursor.moveToNext();
         }
         return arr;
     }

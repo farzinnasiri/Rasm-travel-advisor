@@ -13,7 +13,7 @@ public class Place {
 
     public Place(HashMap map) {
 
-        initializeFields(map);
+//        initializeFields(map);
 //        orderDescriptionsWithImages();
 
     }
