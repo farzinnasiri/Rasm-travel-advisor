@@ -75,6 +75,8 @@ public class Administer {
 
     }
 
+
+
     public ArrayList<User> getUsers() {
         return users;
     }
@@ -98,6 +100,10 @@ public class Administer {
     public void setPlaces(ArrayList<Place> places) {
         this.places = places;
     }
+
+
+
+
 
     /*
             sync from database
@@ -186,12 +192,37 @@ public class Administer {
     public ArrayList<Adventure> getUserAdventure(String username){
         ArrayList<Adventure> adventures = new ArrayList<>();
 
-        for(Integer adventure : getUser(username).)
+        for(Integer adventure : getUser(username).getAdventuresId()){
+            adventures.add(getAdventure(adventure));
+        }
+
+        return adventures;
 
     }
-    public HashMap getUserDatas(String username){
-      return  database.getUserDatas(username);
+
+    private Adventure getAdventure(Integer adventure) {
+        for(Adventure adventuredata : adventures){
+            if(adventuredata.getId() == adventure){
+                return adventuredata;
+            }
+
+        }
+
+        return null;
     }
+
+    public ArrayList<User> getUsers(int adventureId){
+        ArrayList<User> usersAdveture = new ArrayList<>();
+
+        for(User user: getUsers()){
+            if(user.haveAdventure(adventureId)){
+                usersAdveture.add(user);
+            }
+        }
+        return usersAdveture;
+    }
+
+
 
 
 
@@ -199,34 +230,17 @@ public class Administer {
     public ArrayList<Adventure> getFriendsAdventure(String username){
         ArrayList<Adventure> adventures = new ArrayList<>();
 
-        for(String friend: getUserFriends(username)){
-            adventures.addAll(getUserAdventure(friend));
+        for(User friend: getUserFriends(username)){
+            adventures.addAll(getUserAdventure(friend.getUsername()));
         }
         return adventures;
     }
 
 
-    public ArrayList<Adventure> getFriendsAventure(String username , int condition){
-        ArrayList<Adventure> adventures = new ArrayList<>();
-
-        for(Adventure adventure: getFriendsAdventure(username)){
-                if(adventure.getCondition() == 1){
-                    adventures.add(adventure);
-            }
-        }
-        return adventures;
-
-    }
 
 
 
-    public ArrayList<Place> getSuggestedPlace(){
 
-        return places;
-    }
-    public ArrayList<Place> getAllPlace(){
-        return database.getAllPlace();
-    }
 
 
     public User getUser(String username) {

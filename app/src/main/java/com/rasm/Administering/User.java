@@ -10,14 +10,6 @@ public class User {
             private int visibility;
     private ArrayList<User> friends;
 
-    public ArrayList<Integer> getAdventuresId() {
-        return AdventuresId;
-    }
-
-    public void setAdventuresId(ArrayList<Integer> adventuresId) {
-        AdventuresId = adventuresId;
-    }
-
     private ArrayList<Integer> AdventuresId;
     private int image;
 
@@ -31,6 +23,14 @@ public class User {
         this.friends = friends;
         this.image = image;
         this.AdventuresId = AdventuresId;
+    }
+
+    public ArrayList<Integer> getAdventuresId() {
+        return AdventuresId;
+    }
+
+    public void setAdventuresId(ArrayList<Integer> adventuresId) {
+        AdventuresId = adventuresId;
     }
 
     public String getUsername() {
@@ -105,5 +105,14 @@ public class User {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public boolean haveAdventure(int adventureId) {
+        for(Integer adventure : this.AdventuresId){
+            if(adventure == adventureId){return true;}
+        }
+        return false;
+
+
     }
 }
