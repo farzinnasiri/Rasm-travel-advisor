@@ -1,6 +1,7 @@
 package com.rasm;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        HashMap userData = Administer.getInstance().getUserDatas(username);
+        HashMap userData = Administer.getInstance().getUserDatas(username.getText().toString());
 
 
 
         username.setText(Administer.getInstance().getUsername());
-        avatar.setImageBitmap((Bitmap)(userData.get("image")));
+        avatar.setImageBitmap((Bitmap) (userData.get("image")));
         score.setText((String)(userData.get("score")));
     }
 
