@@ -1,28 +1,28 @@
 package com.rasm.adventures;
 
-import android.graphics.Bitmap;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class Place {
 
-    private String descriptions, id, title;
+    private String descriptions, id, name;
+    private String type;
+    private String location;
     private ArrayList<Integer> images;
 
     public Place(HashMap map) {
 
-        initializeFields(map);
-//        orderDescriptionsWithImages();
 
     }
 
-    public Place(String title, String descriptions, ArrayList<Integer> images) {
+    public Place(String name, String descriptions,String type, String location, ArrayList<Integer> images) {
 
         this.images = images;
         this.descriptions = descriptions;
-        this.title = title;
+        this.name = name;
+        this.type = type;
+        this.location = location;
     }
 
     private void initializeFields(HashMap map) {
@@ -33,8 +33,8 @@ public class Place {
         return images;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     public String getDescriptions() {
@@ -53,8 +53,8 @@ public class Place {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ArrayList<Integer> getImages() {

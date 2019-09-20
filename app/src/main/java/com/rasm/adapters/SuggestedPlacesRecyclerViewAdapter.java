@@ -1,7 +1,6 @@
 package com.rasm.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.rasm.ExploreAdventuresActivity;
 import com.rasm.R;
-import com.rasm.UserProfileSettingsActivity;
 import com.rasm.adventures.Place;
 
 import java.util.ArrayList;
@@ -47,7 +44,7 @@ public class SuggestedPlacesRecyclerViewAdapter extends
                 .load(places.get(position).getImages().get(0))
                 .into(holder.image);
 
-        holder.title.setText(places.get(position).getTitle());
+        holder.title.setText(places.get(position).getName());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

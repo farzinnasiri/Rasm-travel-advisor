@@ -186,6 +186,8 @@ public class Administer {
     public ArrayList<Place> getSuggestedPlace(int howMany){
 
 
+
+
         return null;
     }
 
