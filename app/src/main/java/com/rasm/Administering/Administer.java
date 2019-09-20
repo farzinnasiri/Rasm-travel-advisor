@@ -2,13 +2,17 @@ package com.rasm.Administering;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 
+import com.rasm.R;
 import com.rasm.adventures.Adventure;
 import com.rasm.adventures.Place;
 import com.rasm.database.SQLiteOpenHelperExtender;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Administer {
 
@@ -26,8 +30,13 @@ public class Administer {
     }
 
     private void insertFakeData() {
-//        database.insertPlace();
+        ArrayList<Bitmap> fakeImages = new ArrayList<>();
+        fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+        fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+        fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
 
+        database.insertPlace("حافظیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]",fakeImages,"","");
+//database.insertNewUser();
 
     }
 
@@ -63,6 +72,17 @@ public class Administer {
 
         updateData();
     }
+    public void setLoggedIn(boolean isLoggedIn, String uesrName){
+        this.isLoggedIn = isLoggedIn;
+        this.username = username;
+
+        updateData();
+    }
+    public void insertNewUser(String username, String password, String phone, String s, Bitmap bitmap) {
+    database.insertNewUser(username, password,phone,s,bitmap);
+    }
+
+
     private void updateData() {
         update_to_storage();
     }
@@ -111,6 +131,9 @@ public class Administer {
     public ArrayList<Adventure> getUserAdventure(String username){
         return database.getUserAdventures(username);
     }
+    public HashMap getUserDatas(){
+      return  database.getUserDatas(username);
+    }
 //    getFriendsAdventure
 //    getSpecialAdventureByCondition
 
@@ -121,5 +144,6 @@ public class Administer {
 
         return null;
     }
+
 
 }
