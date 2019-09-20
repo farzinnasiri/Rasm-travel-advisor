@@ -71,9 +71,9 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + "FOREIGN KEY(" + FriendsContract.FriendsEntry.COLUMN_FRIEND + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE ) ;";
     private static final String SQL_CREATE_ENTRIES_PLACE_IMAGES = "CREATE TABLE IF NOT EXISTS " + PlaceImagesContract.PlaceImagesEntry.TABLE_NAME + " ("
             + PlaceImagesContract.PlaceImagesEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            +  PlaceImagesContract.PlaceImagesEntry.COLUMN_USER  + " TEXT NOT NULL , "
+            +  PlaceImagesContract.PlaceImagesEntry.COLUMN_PLACE  + " TEXT NOT NULL , "
             +  PlaceImagesContract.PlaceImagesEntry.COLUMN_IMAGES  + " BLOB , "
-            + "FOREIGN KEY(" + PlaceImagesContract.PlaceImagesEntry.COLUMN_USER + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE ) ;";
+            + "FOREIGN KEY(" + PlaceImagesContract.PlaceImagesEntry.COLUMN_PLACE + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE ) ;";
 
     public SQLiteOpenHelperExtender(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -174,16 +174,17 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
     }
 
     public void insertNewUser(String userName, String pass, String phoneNumber, String email, Bitmap image) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(UserContract.UserEntry._COLUMN_NAME, userName);
-        cv.put(UserContract.UserEntry.COLUMN_PASS, pass);
-        cv.put(UserContract.UserEntry.COLUMN_PHONE, phoneNumber);
-        cv.put(UserContract.UserEntry.COLUMN_EMAIL, email);
-        cv.put(UserContract.UserEntry.COLUMN_SCORE, 0);
-        db.insert(UserContract.UserEntry.TABLE_NAME, null, cv);
-        insertBitmap(image, UserContract.UserEntry.TABLE_NAME, UserContract.UserEntry.COLUMN_PROFILE_PICTURE);
-
+        if(!checkForUserName(userName)) {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put(UserContract.UserEntry._COLUMN_NAME, userName);
+            cv.put(UserContract.UserEntry.COLUMN_PASS, pass);
+            cv.put(UserContract.UserEntry.COLUMN_PHONE, phoneNumber);
+            cv.put(UserContract.UserEntry.COLUMN_EMAIL, email);
+            cv.put(UserContract.UserEntry.COLUMN_SCORE, 0);
+            db.insert(UserContract.UserEntry.TABLE_NAME, null, cv);
+            insertBitmap(image, UserContract.UserEntry.TABLE_NAME, UserContract.UserEntry.COLUMN_PROFILE_PICTURE);
+        }
     }
 
 
@@ -192,8 +193,12 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT " + UserContract.UserEntry._COLUMN_NAME + " FROM " + UserContract.UserEntry.TABLE_NAME, null);
         cursor.moveToFirst();
         while (cursor != null) {
-            if (cursor.getString(0) == userName)
+            try {
+                if (cursor.getString(0) == userName)
+                    return true;
+            }catch (Exception e){
                 return true;
+            }
             cursor.moveToNext();
         }
         return checkForUserPhone(userName);
@@ -440,5 +445,23 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         return jsonArr.toString();
     }
 
-//public void insertImageArray();
+public void insertImageArray(ArrayList<Bitmap> images){
+        for(int i=0;i<images.size();i++){
+            insertBitmap(images.get(i), PlaceImagesContract.PlaceImagesEntry.TABLE_NAME, PlaceImagesContract.PlaceImagesEntry.COLUMN_IMAGES);
+        }
+
+}
+    public ArrayList<Bitmap> getImageArray(String places){
+        ArrayList<Bitmap> arr = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + PlaceImagesContract.PlaceImagesEntry.COLUMN_IMAGES + " FROM " + PlaceImagesContract.PlaceImagesEntry.TABLE_NAME + " WHERE " + PlaceImagesContract.PlaceImagesEntry.COLUMN_PLACE + "= '" + places + "'", null);
+        cursor.moveToFirst();
+        while(cursor!=null){
+            byte[] blob = cursor.getBlob(cursor.getColumnIndex(PlaceImagesContract.PlaceImagesEntry.COLUMN_IMAGES));
+            arr.add(BitmapFactory.decodeByteArray(blob, 0, blob.length));
+            cursor.moveToNext();
+
+        }
+        return arr;
+    }
 }

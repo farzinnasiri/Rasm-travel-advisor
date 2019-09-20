@@ -12,7 +12,7 @@ public class PlaceImagesContract {
         public static final String TABLE_NAME = "place_images";
 
         public static final String _ID = BaseColumns._ID;
-        public static final String COLUMN_USER = "user";
+        public static final String COLUMN_PLACE = "place";
         public static final String COLUMN_IMAGES = "images";
 
 
