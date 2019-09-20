@@ -1,6 +1,7 @@
 package com.rasm.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rasm.DetailedAdventureActivity;
 import com.rasm.R;
 import com.rasm.adventures.Adventure;
 
@@ -50,7 +52,8 @@ public class AdventuresRecyclerViewAdapter extends
         viewHolder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(mContext, DetailedAdventureActivity.class);
+                mContext.startActivity(intent);
 
             }
         });

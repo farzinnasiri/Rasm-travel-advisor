@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import android.support.v7.app.AppCompatActivity;
@@ -45,13 +46,16 @@ public class MainActivity extends AppCompatActivity {
         score = findViewById(R.id.dashboard_txt_points);
 
 
+        username.setText(Administer.getInstance().getUsername());
+
+
 
         HashMap userData = Administer.getInstance().getUserDatas(username.getText().toString());
+        if( (userData.get("image")) == null){
 
-
-
-        username.setText(Administer.getInstance().getUsername());
-        avatar.setImageBitmap((Bitmap) (userData.get("image")));
+        }else {
+            avatar.setImageBitmap((Bitmap) (userData.get("image")));
+        }
         score.setText((String)(userData.get("score")));
     }
 

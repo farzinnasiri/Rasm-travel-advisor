@@ -7,22 +7,23 @@
     android:orientation="vertical"
     tools:context=".DetailedAdventureActivity">
 
+
+
     <android.support.v4.view.ViewPager
         android:id="@+id/image_slider_viewer"
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_height="300dp" />
 
     <TextView
         android:id="@+id/adventure_detailed_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="نام ماجراجویی"
         android:textAlignment="center"
         android:textSize="30sp"
-        android:layout_marginTop="20dp"
 
         />
-
 
     <RelativeLayout
         android:id="@+id/adventure_detailed_user"
@@ -51,9 +52,21 @@
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/adventure_detailed_condition"
             android:gravity="center_vertical|left"
-            android:text="39 هفته"
             android:paddingLeft="12dp"
+            android:text="39 هفته"
             android:textColor="#8A888A"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/adventure_detailed_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/adventure_detailed_username"
+            android:gravity="center_vertical"
+            android:text="در حال ماجرا جویی"
+            android:textColor="@color/green"
             android:textSize="13sp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -63,30 +76,20 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_boy" />
 
-        <TextView
-            android:id="@+id/adventure_detailed_condition"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="در حال ماجرا جویی"
-            android:textColor="@color/green"
-            android:layout_toLeftOf="@id/adventure_detailed_username"
-            android:layout_centerHorizontal="true"
-            android:textSize="13sp"
-            android:gravity="center_vertical"
-            android:layout_marginRight="20dp"
-            />
-
     </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/adventure_detailed_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
             android:text="توضیحات "
-
-            />
+            android:textSize="16sp" />
     </ScrollView>
+
 </LinearLayout>

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailedAdventureActivity"></activity>
+        <activity android:name=".PlaceDetailedActivity"></activity>
+        <activity android:name=".DetailedAdventureActivity" />
         <activity
             android:name=".ExploreAdventuresActivity"
             android:theme="@style/AppTheme.NoActionBar" />
