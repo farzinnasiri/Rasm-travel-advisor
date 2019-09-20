@@ -33,7 +33,7 @@ public class Administer {
     }
 
     private void load_from_database() {
-        database = new SQLiteOpenHelperExtender(context);
+//        database = new SQLiteOpenHelperExtender(context);
     }
 
     private void load_from_storage() {

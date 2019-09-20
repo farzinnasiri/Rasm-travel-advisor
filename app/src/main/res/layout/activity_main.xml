@@ -32,9 +32,9 @@
             android:layout_marginTop="6dp"
             android:fontFamily="@font/vazir"
             android:text="10 امتیاز "
-            android:textColor="@color/white"
+            android:textColor="@color/yellow"
             android:textDirection="rtl"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/dashboard_txt_username"
@@ -54,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
+        android:paddingTop="20dp"
         android:background="@drawable/round_dashboard_background">
 
         <LinearLayout
