@@ -182,6 +182,7 @@ public class Administer {
           SharedPreferences sharedPreferences = PreferenceManager
                   .getDefaultSharedPreferences(context);
           isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
           if(isLoggedIn){
               username = sharedPreferences.getString("username" , "");
           }
