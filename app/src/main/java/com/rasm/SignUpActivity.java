@@ -62,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             if(if_obey_rules()){
                 Bitmap bitmap =   BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
 
-                Administer.getInstance().insertNewUser(username , password , phone , "" , bitmap);
+                Administer.getInstance().insertNewUser(username , password , phone , null , bitmap);
                 Administer.getInstance().setLoggedIn(true , username);
 
                 makeToast("اطلاعات شما با موفقیت ثبت گردید");

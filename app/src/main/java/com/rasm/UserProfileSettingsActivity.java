@@ -57,7 +57,12 @@ public class UserProfileSettingsActivity extends AppCompatActivity {
         username.setText(Administer.getInstance().getUsername());
         avatar.setImageBitmap((Bitmap) (userData.get("image")));
         score.setText((String)(userData.get("score")));
-        email.setText((String)(userData.get("email")));
+        if((String)(userData.get("email")) == null){
+        email.setText("");
+
+        }else {
+            email.setText((String) (userData.get("email")));
+        }
         phone.setText((String)(userData.get("phone")));
     }
     @Override
