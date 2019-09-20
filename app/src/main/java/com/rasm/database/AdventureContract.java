@@ -14,6 +14,8 @@ public class AdventureContract {
         public static final String _ID = BaseColumns._ID;
         public static final String COLUMN_USER = "name";
         public static final String COLUMN_STREAM = "stream";
+        public static final String COLUMN_TIME_START = "startDate";
+        public static final String COLUMN_TIME_END = "endDate";
         public static final String COLUMN_VISIBILITY = "visibility";
         public static final String COLUMN_CONDITION = "condition";
         public static final String COLUMN_IMAGES = "images";
@@ -27,8 +29,8 @@ public class AdventureContract {
         public static final int VISIBILITY_PRIVATE = 0;
         public static final int VISIBILITY_PUBLIC = 1;
 
-        public static final int CONDITION_DONE = 0;
-        public static final int CONDITIONS_ONGOING = 1;
+        public static final int CONDITION_DONE = 1;
+        public static final int CONDITIONS_ONGOING = 0;
 
     }
 

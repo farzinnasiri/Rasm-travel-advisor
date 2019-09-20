@@ -32,6 +32,9 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + AdventureContract.AdventureEntry.COLUMN_CONDITION + " INTEGER NOT NULL DEFAULT 0, "
             + AdventureContract.AdventureEntry.COLUMN_VISIBILITY + " INTEGER NOT NULL DEFAULT 0, "
             + AdventureContract.AdventureEntry.COLUMN_IMAGES + " TEXT, "
+            + AdventureContract.AdventureEntry.COLUMN_TIME_START + " DATETIME, "
+            + AdventureContract.AdventureEntry.COLUMN_TIME_END + " DATEETIME, "
+
             + AdventureContract.AdventureEntry.COLUMN_DESCRIPTIONS + " TEXT, "
             + AdventureContract.AdventureEntry.COLUMN_STREAM + " TEXT, "
             + AdventureContract.AdventureEntry.COLUMN_STYLE + " INTEGER NOT NULL DEFAULT 0);";
@@ -53,6 +56,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES_PLACES = "CREATE TABLE " + PlaceContract.PlaceEntry.TABLE_NAME + " ("
             +  PlaceContract.PlaceEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             +  PlaceContract.PlaceEntry.COLUMN_DESCRIPTION + " TEXT, "
+            +  PlaceContract.PlaceEntry.COLUMN_TYPE + " TEXT, "
             + PlaceContract.PlaceEntry.COLUMN_IMAGES + " TEXT, "
             +  PlaceContract.PlaceEntry.COLUMN_NAME + " TEXT NOT NULL, "
             + PlaceContract.PlaceEntry.COLUMN_POSITION + " VARCHAR);";
@@ -307,11 +311,12 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
     }
 
 
-    public void insertPlace(String name, String describe, ArrayList<Bitmap> images, String position){
+    public void insertPlace(String name, String describe, ArrayList<Bitmap> images, String position, String type){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(PlaceContract.PlaceEntry.COLUMN_NAME, name);
         cv.put(PlaceContract.PlaceEntry.COLUMN_POSITION, position);
+        cv.put(PlaceContract.PlaceEntry.COLUMN_TYPE, type);
         cv.put(PlaceContract.PlaceEntry.COLUMN_DESCRIPTION, describe);
         cv.put(PlaceContract.PlaceEntry.COLUMN_IMAGES, arrayBitmapToJsonString(images));
         db.insert(UserContract.UserEntry.TABLE_NAME, null, cv);
@@ -325,6 +330,8 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         map.put("description", cursor.getString(i));
         i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_NAME);
         map.put("name", cursor.getString(i));
+        i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_TYPE);
+        map.put("type", cursor.getString(i));
         i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PASS);
         ArrayList<Bitmap> images = stringToBitmapArray(cursor.getString(i));
         map.put("images",images);
