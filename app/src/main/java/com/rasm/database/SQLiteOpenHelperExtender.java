@@ -47,7 +47,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + UserContract.UserEntry.COLUMN_EMAIL + " TEXT, "
             + UserContract.UserEntry.COLUMN_ADVENTURES + " BLOB, "
             + UserContract.UserEntry.COLUMN_VISIBILITY + " INTEGER NOT NULL DEFAULT 0, "
-            + UserContract.UserEntry.COLUMN_UPLOADEDFILES + " BLOB, "
+            + UserContract.UserEntry.COLUMN_IMAGES + " BLOB, "
             + UserContract.UserEntry.COLUMN_SCORE + " INTEGER NOT NULL DEFAULT 0);";
     private static final String SQL_CREATE_ENTRIES_USER_ADVENTURE = "CREATE TABLE IF NOT EXISTS " + UserAdventureContract.UserAdventureEntry.TABLE_NAME + "("
 //            +UserContract.UserEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -72,12 +72,13 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
     public SQLiteOpenHelperExtender(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+//        context.deleteDatabase(DATABASE_NAME);
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        onUpgrade( db, DATABASE_VERSION, 2);
+
         db.execSQL(SQL_CREATE_ENTRIES_ADVENTURES);
         db.execSQL(SQL_CREATE_ENTRIES_USERS);
         db.execSQL(SQL_CREATE_ENTRIES_USER_ADVENTURE);
