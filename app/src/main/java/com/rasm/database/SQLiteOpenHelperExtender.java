@@ -296,7 +296,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             String advId = cursor.getString(0);
             Cursor c = db.rawQuery("SELECT " + AdventureContract.AdventureEntry._ID + " FROM " + UserContract.UserEntry.TABLE_NAME + " WHERE " + UserContract.UserEntry._ID + "= '" + advId + "'", null);
             c.moveToFirst();
-            list.add(new Adventure(getAdventureDatas(advId)));
+//            list.add(new Adventure(getAdventureDatas(advId)));
             cursor.moveToNext();
         }
         return list;
@@ -477,7 +477,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + PlaceContract.PlaceEntry.TABLE_NAME , null);
         cursor.moveToFirst();
         while(cursor!=null){
-            arr.add(new Place(getPlaceDatas(cursor.getString(cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_POSITION)))));
+//            arr.add(new Place(getPlaceDatas(cursor.getString(cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_POSITION)))));
             cursor.moveToNext();
         }
         return arr;

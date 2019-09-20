@@ -72,9 +72,8 @@ public class AllAdventuresFragment extends Fragment {
         adventures.setLayoutManager(new LinearLayoutManager(getContext()));
 
         ArrayList<Adventure> adventuresList = new ArrayList<>();
-        ArrayList<Bitmap> images = new ArrayList<>();
-        images.add(BitmapFactory.decodeResource(getContext().getResources(),
-                R.drawable.image));
+        ArrayList<Integer> images = new ArrayList<>();
+        images.add(R.drawable.image);
         adventuresList.add(new Adventure("رضا القاسی زاده",
                 "یه روز خوب در شاه چراغ",
                 "امروز","سفری بود فوق العاده به همراه دوستان خوبم",images));

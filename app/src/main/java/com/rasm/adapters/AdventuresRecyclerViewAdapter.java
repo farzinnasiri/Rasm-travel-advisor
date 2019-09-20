@@ -47,7 +47,7 @@ public class AdventuresRecyclerViewAdapter extends
         viewHolder.title.setText(adventures.get(position).getTitle());
         viewHolder.desc.setText(adventures.get(position).getDescriptions());
         viewHolder.date.setText(adventures.get(position).getDate());
-        viewHolder.imageView.setImageBitmap(adventures.get(position).getImages().get(0));
+        viewHolder.imageView.setImageResource(adventures.get(position).getImages().get(0));
 
         viewHolder.card.setOnClickListener(new View.OnClickListener() {
             @Override
