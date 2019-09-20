@@ -9,6 +9,7 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
+import com.rasm.Administering.Administer;
 import com.rasm.adapters.NewFriendsAdventuresAdapter;
 import com.rasm.adapters.OptionsRecyclerViewAdapter;
 
@@ -76,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
                 newAdventuresTitles,
                 usersImages);
         newAdventuresRecyclerView.setAdapter(adapter2);
+
+
+        Administer.getInstance().getSuggestedPlace(4);
 
     }
 
