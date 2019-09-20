@@ -26,10 +26,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        initUI();
 
         initRecyclerViewers();
 
+
+    }
+
+    private void initUI() {
+       username = findViewById(R.id.dashboard_txt_username);
+
+
+        username.setText(Administer.getInstance().getUsername());
 
     }
 
