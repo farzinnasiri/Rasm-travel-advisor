@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="12dp"
+
         android:paddingTop="12dp"
         android:paddingRight="12dp">
 
@@ -24,15 +24,25 @@
             android:id="@+id/lnrContainer2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right|center_vertical"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:weightSum="2">
 
+            <ImageView
+                android:id="@+id/adventure_card_place_photo"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:src="@drawable/image"
+                android:layout_weight="0.8"
+
+                />
             <TextView
                 android:id="@+id/adventure_card_title"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.8"
+                android:layout_weight="1.2"
+                android:paddingRight="12dp"
                 android:gravity="right|center_vertical"
                 android:lineSpacingExtra="2dp"
                 android:text="یک روز خوب با خانواده"
@@ -40,6 +50,7 @@
                 android:textDirection="anyRtl"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
 
         </LinearLayout>
 
@@ -71,6 +82,7 @@
                 android:layout_toLeftOf="@+id/adventure_card_username"
                 android:gravity="center_vertical|left"
                 android:text="39 هفته"
+                android:paddingLeft="12dp"
                 android:textColor="#8A888A"
                 android:textSize="13sp" />
 

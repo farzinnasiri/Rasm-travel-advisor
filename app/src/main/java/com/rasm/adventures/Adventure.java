@@ -1,8 +1,11 @@
 package com.rasm.adventures;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
 
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.rasm.R;
 import com.rasm.database.SQLiteOpenHelperExtender;
 
 import java.util.ArrayList;
@@ -14,15 +17,24 @@ public class Adventure {
     private String username;
     private String stream;
     private String title;
+
+
+
     private String date;
-
-
 
     private String descriptions;
     private String id ;
     private int condition, style,visibility;
     private ArrayList<Bitmap> images;
-//    private ArrayList<ImageWithDescription> imageWithDescriptions;
+
+    public Adventure(String username, String title, String date, String descriptions,
+                     ArrayList<Bitmap> images) {
+        this.username = username;
+        this.title = title;
+        this.date = date;
+        this.descriptions = descriptions;
+        this.images = images;
+    }
 
     public Adventure(HashMap map){
 
@@ -33,6 +45,7 @@ public class Adventure {
 
 
     private void initializeFields(HashMap map) {
+
         condition = (int)map.get("condition");
         style = (int)map.get("style");
         visibility = (int)map.get("style");
@@ -41,7 +54,6 @@ public class Adventure {
         stream = (String)map.get("stream");
         descriptions = (String)map.get("description");
         title = (String)map.get("title");
-//        images = SQLiteOpenHelperExtender.stringToBitmapArray((String) map.get("images"));
     }
 
     public int getCondition() {
