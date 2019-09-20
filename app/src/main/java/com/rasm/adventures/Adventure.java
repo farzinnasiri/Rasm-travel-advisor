@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 public class Adventure {
 
-    private String username;
     private String stream;
     private String title;
 
@@ -27,13 +26,13 @@ public class Adventure {
     private int condition, style,visibility;
     private ArrayList<Integer> images;
 
-    public Adventure(String username, String title, String date, String descriptions,
+    public Adventure(int id, String title, String date, String descriptions,
                      ArrayList<Integer> images) {
-        this.username = username;
         this.title = title;
         this.date = date;
         this.descriptions = descriptions;
         this.images = images;
+        this.id = id;
     }
 
 
@@ -67,9 +66,6 @@ public class Adventure {
     public String getStream() {
         return stream;
     }
-    public String getUsername() {
-        return username;
-    }
 
     public void setCondition(int condition) {
         this.condition = condition;
@@ -95,9 +91,6 @@ public class Adventure {
         this.style = style;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public void setVisibility(int visibility) {
         this.visibility = visibility;

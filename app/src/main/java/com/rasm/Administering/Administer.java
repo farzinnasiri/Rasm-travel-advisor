@@ -180,7 +180,7 @@ public class Administer {
     public ArrayList<Adventure> getUserAdventure(String username){
         ArrayList<Adventure> adventures = new ArrayList<>();
 
-        for(Integer)
+        for(Integer adventure : getUser(username).)
 
     }
     public HashMap getUserDatas(String username){
