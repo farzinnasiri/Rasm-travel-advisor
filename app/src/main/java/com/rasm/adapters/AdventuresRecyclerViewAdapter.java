@@ -43,7 +43,8 @@ public class AdventuresRecyclerViewAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.username.setText(Administer.getInstance().);
+        viewHolder.username.setText(Administer.getInstance()
+                .getUsers(adventures.get(position).getId()).get(0).getUsername());
 
         viewHolder.title.setText(adventures.get(position).getTitle());
         viewHolder.desc.setText(adventures.get(position).getDescriptions());
