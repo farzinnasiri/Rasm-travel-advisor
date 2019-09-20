@@ -13,7 +13,6 @@ import com.rasm.R;
 public class AllAdventuresFragment extends Fragment {
 
 
-
     public AllAdventuresFragment(){
 
     }
