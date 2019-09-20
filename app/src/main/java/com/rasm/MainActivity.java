@@ -108,9 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Place> places = new ArrayList<>();
 
-        ArrayList<Bitmap> images = new ArrayList<Bitmap>();
-        images.add(BitmapFactory.decodeResource(this.getResources(),
-                R.drawable.image));
+        ArrayList<Integer> images = new ArrayList<>();
+        images.add(R.drawable.image);
 
         places.add(new Place("تخت جمشید","یک جای خیلی باحالا با کلی چیز میز قدیمی","آثار باستانی","شیراز",images));
         places.add(new Place("آرامگاه سعدی","شیخ اجل سعدی","آثار باستانی","شیراز",images));
