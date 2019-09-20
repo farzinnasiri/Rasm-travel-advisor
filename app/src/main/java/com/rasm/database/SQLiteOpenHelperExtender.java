@@ -273,6 +273,10 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         map.put("visibility", cursor.getInt(i));
         i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_USER);
         map.put("user", cursor.getString(i));
+        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_TIME_START);
+        map.put("start", cursor.getString(i));
+        i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_TIME_END);
+        map.put("end", cursor.getString(i));
         i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_IMAGES);
         map.put("images", stringToBitmapArray(cursor.getString(i)));
         map.put("id", advId);
@@ -292,7 +296,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         return list;
     }
 
-    public void insertNewAdventure(String ID, String userName, int condition, String stream, int style, int visibility,ArrayList<Bitmap> images, String descriptions) {
+    public void insertNewAdventure(String ID, String userName, String startTime int condition, String stream, int style, int visibility,ArrayList<Bitmap> images, String descriptions) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(AdventureContract.AdventureEntry.COLUMN_USER, userName);
@@ -332,7 +336,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         map.put("name", cursor.getString(i));
         i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_TYPE);
         map.put("type", cursor.getString(i));
-        i = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PASS);
+        i = cursor.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_IMAGES);
         ArrayList<Bitmap> images = stringToBitmapArray(cursor.getString(i));
         map.put("images",images);
 
