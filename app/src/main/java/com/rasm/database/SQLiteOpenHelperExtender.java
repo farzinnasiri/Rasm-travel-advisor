@@ -317,6 +317,8 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         return list;
     }
 
+   // what happens if we directly get a DATETIME as String?? how bad is the result??
+
     public void insertNewAdventure(String ID, String userName, String startTime, String endTime, int condition, String stream, int style, int visibility, ArrayList<Bitmap> images, String descriptions) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -358,6 +360,18 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         cv.put(FriendsContract.FriendsEntry.COLUMN_FRIEND, friend);
         db.insert(UserAdventureContract.UserAdventureEntry.TABLE_NAME, null, cv);
     }
+
+    public ArrayList<String> getFriends(String userName) {
+        ArrayList<String> friends = new ArrayList<String>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + FriendsContract.FriendsEntry.COLUMN_FRIEND +" FROM " + FriendsContract.FriendsEntry.TABLE_NAME + " WHERE " + FriendsContract.FriendsEntry.COLUMN_USER + "= '" + userName + "'", null);
+        cursor.moveToFirst();
+        while (cursor!=null){
+            friends.add(cursor.getString(0));
+        }
+        return friends;
+    }
+
 
     public HashMap getPlaceDatas(String position) {
         SQLiteDatabase db = getReadableDatabase();
