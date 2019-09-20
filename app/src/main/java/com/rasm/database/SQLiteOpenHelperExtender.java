@@ -51,12 +51,12 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + UserContract.UserEntry.COLUMN_SCORE + " INTEGER NOT NULL DEFAULT 0);";
     private static final String SQL_CREATE_ENTRIES_USER_ADVENTURE = "CREATE TABLE IF NOT EXISTS " + UserAdventureContract.UserAdventureEntry.TABLE_NAME + "("
 //            +UserContract.UserEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE  + " INTEGER , "
+            + UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE  + " INTEGER(3) , "
             + " FOREIGN KEY(" + UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE + ") REFERENCES " + AdventureContract.AdventureEntry.TABLE_NAME + "(" + AdventureContract.AdventureEntry._ID + ")  ON DELETE CASCADE ON UPDATE CASCADE , "
             + UserAdventureContract.UserAdventureEntry.COLUMN_USER  + " TEXT NOT NULL , "
             + "FOREIGN KEY(" + UserAdventureContract.UserAdventureEntry.COLUMN_USER + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE );";
-    private static final String SQL_CREATE_ENTRIES_PLACES = "CREATE TABLE IF NOT EXISTS " + PlaceContract.PlaceEntry.TABLE_NAME + " ("
-            + PlaceContract.PlaceEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+    private static final String SQL_CREATE_ENTRIES_PLACES = "CREATE TABLE IF NOT EXISTS " + PlaceContract.PlaceEntry.TABLE_NAME + "("
+            + PlaceContract.PlaceEntry._ID + " INTEGER(3) PRIMARY KEY AUTOINCREMENT, "
             + PlaceContract.PlaceEntry.COLUMN_DESCRIPTION + " TEXT, "
             + PlaceContract.PlaceEntry.COLUMN_TYPE + " TEXT, "
             + PlaceContract.PlaceEntry.COLUMN_IMAGES + " TEXT, "
@@ -64,7 +64,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + PlaceContract.PlaceEntry.COLUMN_POSITION + " VARCHAR);";
 
     private static final String SQL_CREATE_ENTRIES_FRIENDS = "CREATE TABLE IF NOT EXISTS " + FriendsContract.FriendsEntry.TABLE_NAME + " ("
-            + FriendsContract.FriendsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + FriendsContract.FriendsEntry._ID + " INTEGER(3) PRIMARY KEY AUTOINCREMENT, "
             +  FriendsContract.FriendsEntry.COLUMN_USER  + " TEXT NOT NULL , "
             + "FOREIGN KEY(" + FriendsContract.FriendsEntry.COLUMN_USER + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE , "
             +  FriendsContract.FriendsEntry.COLUMN_FRIEND  + " TEXT NOT NULL , "
