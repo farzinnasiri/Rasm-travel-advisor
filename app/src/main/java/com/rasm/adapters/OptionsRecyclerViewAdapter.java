@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.rasm.ExploreAdventuresActivity;
 import com.rasm.R;
+import com.rasm.UserProfileSettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,11 @@ public class OptionsRecyclerViewAdapter extends RecyclerView.Adapter<OptionsRecy
                     Intent intent = new Intent(mContext, ExploreAdventuresActivity.class);
                     mContext.startActivity(intent);
                 }
+                else if(titles.get(position).equals("تنظیمات")){
+                    Intent intent = new Intent(mContext, UserProfileSettingsActivity.class);
+                    mContext.startActivity(intent);
+                }
+
             }
         });
     }

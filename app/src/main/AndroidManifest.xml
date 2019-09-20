@@ -12,7 +12,7 @@
         <activity android:name=".ExploreAdventuresActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".UserProfileSettingsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SplashScreen"
