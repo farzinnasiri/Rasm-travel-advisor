@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import com.rasm.R;
 import com.rasm.adventures.Adventure;
 import com.rasm.adventures.Place;
+import com.rasm.database.PlaceContract;
 import com.rasm.database.SQLiteOpenHelperExtender;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class Administer {
         fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
         fakeImages.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
 
-        database.insertPlace("حافظیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]",fakeImages,"","");
+        database.insertPlace("حافظیه","حافظیه یا آرامگاه حافظ نام مجموعه ای آرامگاهی در شمال شهر شیراز و در جنوب دروازهٔ قرآن است که آرامگاه حافظ شیرازی را در خود جای داده است. مساحت حافظیه ۲ هکتار بوده و از ۲ صحن شمالی و جنوبی تشکیل یافته است و این صحنها توسط تالاری از یکدیگر جدا شده اند. این مجموعه ۴ در ورودی-خروجی دارد که در اصلی در سمت جنوب آن، دو در در سمت غرب و یک در در سمت شمال شرق مجموعه قرار گرفته است.[۱]",fakeImages,"", PlaceContract.PlaceEntry.TYPE_SHRINE);
 //database.insertNewUser();
 
     }
