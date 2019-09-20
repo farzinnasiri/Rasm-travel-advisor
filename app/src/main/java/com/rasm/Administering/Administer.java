@@ -55,21 +55,18 @@ public class Administer {
         users.add(new User("گری","777","sh3i123@yahoo.com","09128768876", "gareguri", 0,new ArrayList<User>(),0,new ArrayList<Integer>()));
         users.add(new User("سری","678","sasdfd@yahoo.com","091887634987", "sariguli", 1,new ArrayList<User>(),0,new ArrayList<Integer>()));
 
-
-       addFakeFriends();
-       addFakeAdventures();
 //        database.insertNewUser("سلام","salam ","09123341234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
 //        database.insertNewUser("rgd","ddd ","09123345234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
 //        database.insertNewUser("asd","fff ","0912336234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
 //        database.insertNewUser("wer","salghham ","09111341234","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
-//        database.insertNewUser("uyt","saljjam","09123341134","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
-//
-//
-//
-//        database.insertNewFriend("rgd", "سلام");
-//        database.insertNewFriend("asd", "سلام");
-//        database.insertNewFriend("wer", "سلام");
-//        database.insertNewFriend("uyt", "سلام");
+        database.insertNewUser("uyt","saljjam","09123341134","",BitmapFactory.decodeResource(context.getResources(), R.drawable.image));
+
+
+
+        database.insertNewFriend("rgd", "سلام");
+        database.insertNewFriend("asd", "سلام");
+        database.insertNewFriend("wer", "سلام");
+        database.insertNewFriend("uyt", "سلام");
 
 
 
@@ -78,22 +75,6 @@ public class Administer {
 
     }
 
-    private void addFakeAdventures() {
-
-    }
-
-    private void addFakeFriends() {
-        users.get(0).addFriend(users.get(1));
-        users.get(0).addFriend(users.get(3));
-        users.get(0).addFriend(users.get(4));
-        users.get(1).addFriend(users.get(6));
-        users.get(1).addFriend(users.get(2));
-        users.get(2).addFriend(users.get(6));
-        users.get(2).addFriend(users.get(5));
-        users.get(3).addFriend(users.get(6));
-        users.get(3).addFriend(users.get(5));
-        users.get(4).addFriend(users.get(5));
-    }
 
 
     public ArrayList<User> getUsers() {

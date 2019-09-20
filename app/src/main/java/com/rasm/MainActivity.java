@@ -80,23 +80,6 @@ public class MainActivity extends AppCompatActivity {
         optionsRecyclerView.setAdapter(adapter);
 
 
-        ArrayList<Adventure> Adventures = new ArrayList<>();
-        newAdventuresTitles.add("آرامگاه سعدی");
-        newAdventuresTitles.add("تخت جمشید");
-        newAdventuresTitles.add("کاخ نیاوران");
-        newAdventuresTitles.add("آرامگاه حافظ");
-
-        ArrayList<String> userNames = new ArrayList<>();
-        userNames.add("کریم بزغاله");
-        userNames.add("علی گوساله");
-        userNames.add("لوبیا چشم بلبلی");
-        userNames.add("جمشید اوسکوله");
-
-        ArrayList<Integer> usersImages = new ArrayList<>();
-        usersImages.add(R.drawable.ic_girl);
-        usersImages.add(R.drawable.ic_man);
-        usersImages.add(R.drawable.ic_girl2);
-        usersImages.add(R.drawable.ic_boy);
 
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false);
