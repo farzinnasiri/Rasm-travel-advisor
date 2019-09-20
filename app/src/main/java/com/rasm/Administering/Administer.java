@@ -2,6 +2,7 @@ package com.rasm.Administering;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 
 import com.rasm.adventures.Adventure;
@@ -20,7 +21,7 @@ public class Administer {
 
     private SQLiteOpenHelperExtender database;
 
-    private Administer(){
+    private Administer() {
         load_data();
     }
 
@@ -38,22 +39,28 @@ public class Administer {
 
     private void load_from_storage() {
 
-          SharedPreferences sharedPreferences = PreferenceManager
-                  .getDefaultSharedPreferences(context);
-          isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
-          if(isLoggedIn){
-              username = sharedPreferences.getString("username" , "");
-          }
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        if (isLoggedIn) {
+            username = sharedPreferences.getString("username", "");
+        }
 
     }
 
-    public boolean isLoggedIn(){
-        return  isLoggedIn;
+    public boolean isLoggedIn() {
+        return isLoggedIn;
     }
 
-    public void setLoggedIn(boolean isLoggedIn){
+    public void setLoggedIn(boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
 
+        updateData();
+    }
+
+    public void setLoggedIn(boolean isLoggedIn, String username) {
+        this.isLoggedIn = isLoggedIn;
+        this.username = username;
         updateData();
     }
 
@@ -66,18 +73,18 @@ public class Administer {
                 .getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isLoggedIn", isLoggedIn);
-        editor.putString("username" , username);
+        editor.putString("username", username);
         editor.apply();
     }
 
-    public static Administer getInstance(){
-        if(administer == null){
+    public static Administer getInstance() {
+        if (administer == null) {
             administer = new Administer();
         }
         return administer;
     }
 
-    public static void setContext(Context context){
+    public static void setContext(Context context) {
         Administer.context = context;
     }
 
@@ -85,10 +92,10 @@ public class Administer {
         this method get username or phone and password and check if both
         are correct or not!
      */
-    public boolean check_info_of_user_is_correct(String user_or_pass , String pass) {
+    public boolean check_info_of_user_is_correct(String user_or_phone, String pass) {
 
+        return database.userpassMatches(user_or_phone, pass);
 
-        return false;
     }
 
     /*
@@ -96,17 +103,20 @@ public class Administer {
         if the answer is not the person can create account
      */
     public boolean if_username_exist(String username) {
-        return false;
+        return database.checkForUserName(username);
     }
 
-    public ArrayList<Adventure> getUserAdventure(String username){
+    public ArrayList<Adventure> getUserAdventure(String username) {
         return database.getUserAdventures(username);
     }
 
-    public ArrayList<Place> getSuggestedPlace(int howMany){
+    public ArrayList<Place> getSuggestedPlace(int howMany) {
 
 
         return null;
     }
 
+    public void insertNewUser(String userName, String pass, String phoneNumber, String email, Bitmap image) {
+        database.insertNewUser(userName, pass, phoneNumber, email, image);
+    }
 }

@@ -2,6 +2,9 @@ package com.rasm;
 
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -56,8 +60,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String phone = phoneNumber.getText().toString() ;
 
             if(if_obey_rules()){
+                Bitmap bitmap =   BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
 
-                Administer.getInstance().setLoggedIn(true);
+                Administer.getInstance().insertNewUser(username , password , phone , "" , bitmap);
+                Administer.getInstance().setLoggedIn(true , username);
 
                 makeToast("اطلاعات شما با موفقیت ثبت گردید");
                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
@@ -74,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String phone = phoneNumber.getText().toString() ;
         if(Administer.getInstance().if_username_exist(username)){
             makeToast( "این نام کاربری توسط کاربر دیگری ساخته شده است" );
-
+            return false;
         }
         else if(!Pattern.matches("(\\+98|0)?9\\d{9}" , phone)){
             makeToast( "شماره تلفن معتبر نمی باشد"  );
