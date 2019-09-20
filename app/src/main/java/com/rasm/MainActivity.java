@@ -94,17 +94,17 @@ public class MainActivity extends AppCompatActivity {
 
         newAdventuresRecyclerView.setAdapter(adapter2);
 
-        ArrayList<Place> places = new ArrayList<>();
+        ArrayList<Place> places = Administer.getInstance().getPlaces();
 
-        ArrayList<Integer> images = new ArrayList<>();
-        images.add(R.drawable.image);
-
-        places.add(new Place("تخت جمشید","یک جای خیلی باحالا با کلی چیز میز قدیمی","آثار باستانی","شیراز",images));
-        places.add(new Place("آرامگاه سعدی","شیخ اجل سعدی","آثار باستانی","شیراز",images));
-        places.add(new Place("آرامگاه حافظ","لسان الغیب شیرازی","آثار باستانی","شیراز",images));
-        places.add(new Place("پل طبیعت","یک پل فوق العاده","مکان دیدنی","تهران",images));
-        places.add(new Place("تلکابین رامسر","تلکابین سواری در شمال کشور","طبیعت گردی","مازندارن",images));
-        places.add(new Place("کیش","فوق العاده ترین جزیره ایران","استراحتی","جزیره کیش",images));
+//        ArrayList<Integer> images = new ArrayList<>();
+//        images.add(R.drawable.image);
+//
+//        places.add(new Place("تخت جمشید","یک جای خیلی باحالا با کلی چیز میز قدیمی","آثار باستانی","شیراز",images));
+//        places.add(new Place("آرامگاه سعدی","شیخ اجل سعدی","آثار باستانی","شیراز",images));
+//        places.add(new Place("آرامگاه حافظ","لسان الغیب شیرازی","آثار باستانی","شیراز",images));
+//        places.add(new Place("پل طبیعت","یک پل فوق العاده","مکان دیدنی","تهران",images));
+//        places.add(new Place("تلکابین رامسر","تلکابین سواری در شمال کشور","طبیعت گردی","مازندارن",images));
+//        places.add(new Place("کیش","فوق العاده ترین جزیره ایران","استراحتی","جزیره کیش",images));
 
         LinearLayoutManager suggestedPlacesLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL,false);
