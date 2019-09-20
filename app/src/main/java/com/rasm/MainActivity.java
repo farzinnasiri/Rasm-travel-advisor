@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         initRecyclerViewers();
 
+
+
+
     }
 
     private void initAvatar() {
