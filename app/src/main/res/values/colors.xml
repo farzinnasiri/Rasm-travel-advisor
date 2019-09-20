@@ -18,7 +18,8 @@
     <color name="transparent">#11000000</color>
     <color name="dashboard_background">#4FC3F7</color>
     <color name="black">#0E0E0F</color>
-    <color name="red">#FF0000</color>
+    <color name="red">#b71c1c</color>
+    <color name="green">#2E7D32</color>
     <color name="yellow">#FFEB3B</color>
 
 </resources>

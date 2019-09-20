@@ -1,9 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DetailedAdventureActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/image_slider_viewer"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+
+    <TextView
+        android:id="@+id/adventure_detailed_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="نام ماجراجویی"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:layout_marginTop="20dp"
+
+        />
+
+
+    <RelativeLayout
+        android:id="@+id/adventure_detailed_user"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/adventure_detailed_user"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/adventure_detailed_username"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/adventure_card_profile_photo"
+            android:gravity="center_vertical"
+            android:text="آرین فراستی"
+            android:textColor="#313031"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/adventure_detailed_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/adventure_detailed_condition"
+            android:gravity="center_vertical|left"
+            android:text="39 هفته"
+            android:paddingLeft="12dp"
+            android:textColor="#8A888A"
+            android:textSize="13sp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/adventure_card_profile_photo"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_boy" />
+
+        <TextView
+            android:id="@+id/adventure_detailed_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="در حال ماجرا جویی"
+            android:textColor="@color/green"
+            android:layout_toLeftOf="@id/adventure_detailed_username"
+            android:layout_centerHorizontal="true"
+            android:textSize="13sp"
+            android:gravity="center_vertical"
+            android:layout_marginRight="20dp"
+            />
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/adventure_detailed_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:text="توضیحات "
+
+            />
+    </ScrollView>
+</LinearLayout>
