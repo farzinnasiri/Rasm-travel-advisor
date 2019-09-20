@@ -26,7 +26,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "adventures.db";
     private static final int DATABASE_VERSION = 1;
 
-    private static final String SQL_CREATE_ENTRIES_ADVENTURES = "CREATE TABLE " + AdventureContract.AdventureEntry.TABLE_NAME + " ("
+    private static final String SQL_CREATE_ENTRIES_ADVENTURES = "CREATE TABLE IF NOT EXISTS " + AdventureContract.AdventureEntry.TABLE_NAME + " ("
             + AdventureContract.AdventureEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + AdventureContract.AdventureEntry.COLUMN_USER + " TEXT NOT NULL, "
             + AdventureContract.AdventureEntry.COLUMN_CONDITION + " INTEGER NOT NULL DEFAULT 0, "
@@ -38,7 +38,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + AdventureContract.AdventureEntry.COLUMN_DESCRIPTIONS + " TEXT, "
             + AdventureContract.AdventureEntry.COLUMN_STREAM + " TEXT, "
             + AdventureContract.AdventureEntry.COLUMN_STYLE + " INTEGER NOT NULL DEFAULT 0);";
-    private static final String SQL_CREATE_ENTRIES_USERS = "CREATE TABLE " + UserContract.UserEntry.TABLE_NAME + " ("
+    private static final String SQL_CREATE_ENTRIES_USERS = "CREATE TABLE IF NOT EXISTS " + UserContract.UserEntry.TABLE_NAME + " ("
 //            +UserContract.UserEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
             + UserContract.UserEntry._COLUMN_NAME + " TEXT PRIMARY KEY NOT NULL, "
             + UserContract.UserEntry.COLUMN_PASS + " TEXT NOT NULL, "
@@ -49,11 +49,13 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + UserContract.UserEntry.COLUMN_VISIBILITY + " INTEGER NOT NULL DEFAULT 0, "
             + UserContract.UserEntry.COLUMN_UPLOADEDFILES + " BLOB, "
             + UserContract.UserEntry.COLUMN_SCORE + " INTEGER NOT NULL DEFAULT 0);";
-    private static final String SQL_CREATE_ENTRIES_USER_ADVENTURE = "CREATE TABLE " + UserAdventureContract.UserAdventureEntry.TABLE_NAME + " ("
+    private static final String SQL_CREATE_ENTRIES_USER_ADVENTURE = "CREATE TABLE IF NOT EXISTS " + UserAdventureContract.UserAdventureEntry.TABLE_NAME + "("
 //            +UserContract.UserEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + "FOREIGN KEY(" + UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE + ") REFERENCES " + AdventureContract.AdventureEntry.TABLE_NAME + "(" + AdventureContract.AdventureEntry._ID + ")  ON DELETE CASCADE ON UPDATE CASCADE , "
+            + UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE  + " INTEGER , "
+            + " FOREIGN KEY(" + UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE + ") REFERENCES " + AdventureContract.AdventureEntry.TABLE_NAME + "(" + AdventureContract.AdventureEntry._ID + ")  ON DELETE CASCADE ON UPDATE CASCADE , "
+            + UserAdventureContract.UserAdventureEntry.COLUMN_USER  + " TEXT NOT NULL , "
             + "FOREIGN KEY(" + UserAdventureContract.UserAdventureEntry.COLUMN_USER + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE );";
-    private static final String SQL_CREATE_ENTRIES_PLACES = "CREATE TABLE " + PlaceContract.PlaceEntry.TABLE_NAME + " ("
+    private static final String SQL_CREATE_ENTRIES_PLACES = "CREATE TABLE IF NOT EXISTS " + PlaceContract.PlaceEntry.TABLE_NAME + " ("
             + PlaceContract.PlaceEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PlaceContract.PlaceEntry.COLUMN_DESCRIPTION + " TEXT, "
             + PlaceContract.PlaceEntry.COLUMN_TYPE + " TEXT, "
@@ -61,10 +63,12 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             + PlaceContract.PlaceEntry.COLUMN_NAME + " TEXT NOT NULL, "
             + PlaceContract.PlaceEntry.COLUMN_POSITION + " VARCHAR);";
 
-    private static final String SQL_CREATE_ENTRIES_FRIENDS = "CREATE TABLE " + FriendsContract.FriendsEntry.TABLE_NAME + " ("
+    private static final String SQL_CREATE_ENTRIES_FRIENDS = "CREATE TABLE IF NOT EXISTS " + FriendsContract.FriendsEntry.TABLE_NAME + " ("
             + FriendsContract.FriendsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +  FriendsContract.FriendsEntry.COLUMN_USER  + " TEXT NOT NULL , "
             + "FOREIGN KEY(" + FriendsContract.FriendsEntry.COLUMN_USER + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE , "
-            + "FOREIGN KEY(" + FriendsContract.FriendsEntry.COLUMN_FRIEND + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE );";
+            +  FriendsContract.FriendsEntry.COLUMN_FRIEND  + " TEXT NOT NULL , "
+            + "FOREIGN KEY(" + FriendsContract.FriendsEntry.COLUMN_FRIEND + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE ) ;";
 
     public SQLiteOpenHelperExtender(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -317,7 +321,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         return list;
     }
 
-   // what happens if we directly get a DATETIME as String?? how bad is the result??
+    // what happens if we directly get a DATETIME as String?? how bad is the result??
 
     public void insertNewAdventure(String ID, String userName, String startTime, String endTime, int condition, String stream, int style, int visibility, ArrayList<Bitmap> images, String descriptions) {
         SQLiteDatabase db = getWritableDatabase();
