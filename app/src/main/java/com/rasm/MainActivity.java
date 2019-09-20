@@ -14,9 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rasm.Administering.Administer;
+import com.rasm.Administering.User;
 import com.rasm.adapters.NewFriendsAdventuresAdapter;
 import com.rasm.adapters.OptionsRecyclerViewAdapter;
 import com.rasm.adapters.SuggestedPlacesRecyclerViewAdapter;
+import com.rasm.adventures.Adventure;
 import com.rasm.adventures.Place;
 
 import java.util.ArrayList;
@@ -49,14 +51,10 @@ public class MainActivity extends AppCompatActivity {
         username.setText(Administer.getInstance().getUsername());
 
 
+        User user = Administer.getInstance().getUser(Administer.getInstance().getUsername());
 
-        HashMap userData = Administer.getInstance().getUserDatas(username.getText().toString());
-        if( (userData.get("image")) == null){
-
-        }else {
-            avatar.setImageBitmap((Bitmap) (userData.get("image")));
-        }
-        score.setText((String)(userData.get("score")));
+        avatar.setImageResource(user.getImage());
+        score.setText(user.getScore());
     }
 
 
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         optionsRecyclerView.setAdapter(adapter);
 
 
-        ArrayList<String> newAdventuresTitles = new ArrayList<>();
+        ArrayList<Adventure> Adventures = new ArrayList<>();
         newAdventuresTitles.add("آرامگاه سعدی");
         newAdventuresTitles.add("تخت جمشید");
         newAdventuresTitles.add("کاخ نیاوران");
