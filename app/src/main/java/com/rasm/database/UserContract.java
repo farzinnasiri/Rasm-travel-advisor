@@ -11,7 +11,7 @@ public class UserContract {
         public static final String TABLE_NAME = "adventures";
 
         public static final String _ID = BaseColumns._ID;
-        public static final String COLUMN_NAME = "name";
+        public static final String _COLUMN_NAME = "name";
         public static final String COLUMN_PASS = "password";
         public static final String COLUMN_PHONE = "phone";
         public static final String COLUMN_EMAIL= "email";
