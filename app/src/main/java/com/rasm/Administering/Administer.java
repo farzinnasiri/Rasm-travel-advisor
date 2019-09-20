@@ -27,7 +27,7 @@ public class Administer {
 
     private Administer(){
         load_data();
-//        insertFakeData();
+        insertFakeData();
     }
 
     private void insertFakeData() {
@@ -65,7 +65,7 @@ public class Administer {
      */
     private void load_data() {
         load_from_storage();
-//        load_from_database();
+        load_from_database();
     }
 
     private void load_from_database() {

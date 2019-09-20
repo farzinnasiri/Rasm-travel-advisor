@@ -75,23 +75,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private boolean if_obey_rules() {
-        return  true;
-//
-//        String username = this.username.getText().toString();
-//        String password = this.password.getText().toString();
-//        String phone = phoneNumber.getText().toString() ;
-//        if(Administer.getInstance().if_username_exist(username)){
-//            makeToast( "این نام کاربری توسط کاربر دیگری ساخته شده است" );
-//            return false;
-//        }
-//        else if(!Pattern.matches("(\\+98|0)?9\\d{9}" , phone)){
-//            makeToast( "شماره تلفن معتبر نمی باشد"  );
-//            return false;
-//        } else if( password.length() < 4) {
-//            makeToast("رمز عبور باید از 4 کارکتر بیشتر باشد");
-//            return false;
-//        }
-//            return true;
+
+        String username = this.username.getText().toString();
+        String password = this.password.getText().toString();
+        String phone = phoneNumber.getText().toString() ;
+        if(Administer.getInstance().if_username_exist(username)){
+            makeToast( "این نام کاربری توسط کاربر دیگری ساخته شده است" );
+            return false;
+        }
+        else if(!Pattern.matches("(\\+98|0)?9\\d{9}" , phone)){
+            makeToast( "شماره تلفن معتبر نمی باشد"  );
+            return false;
+        } else if( password.length() < 4) {
+            makeToast("رمز عبور باید از 4 کارکتر بیشتر باشد");
+            return false;
+        }
+            return true;
     }
 
 

@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
         score = findViewById(R.id.dashboard_txt_points);
 
 
-//
-//        HashMap userData = Administer.getInstance().getUserDatas(username.getText().toString());
-//
-//
-//
-//        username.setText(Administer.getInstance().getUsername());
-//        avatar.setImageBitmap((Bitmap) (userData.get("image")));
-//        score.setText((String)(userData.get("score")));
+
+        HashMap userData = Administer.getInstance().getUserDatas(username.getText().toString());
+
+
+
+        username.setText(Administer.getInstance().getUsername());
+        avatar.setImageBitmap((Bitmap) (userData.get("image")));
+        score.setText((String)(userData.get("score")));
     }
 
 

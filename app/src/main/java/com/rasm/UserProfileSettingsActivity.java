@@ -50,20 +50,20 @@ public class UserProfileSettingsActivity extends AppCompatActivity {
             }
         });
 //
-//        HashMap userData = Administer.getInstance().getUserDatas(username.getText().toString());
-//
-//
-//
-//        username.setText(Administer.getInstance().getUsername());
-//        avatar.setImageBitmap((Bitmap) (userData.get("image")));
-//        score.setText((String)(userData.get("score")));
-//        if((String)(userData.get("email")) == null){
-//        email.setText("");
-//
-//        }else {
-//            email.setText((String) (userData.get("email")));
-//        }
-//        phone.setText((String)(userData.get("phone")));
+        HashMap userData = Administer.getInstance().getUserDatas(username.getText().toString());
+
+
+
+        username.setText(Administer.getInstance().getUsername());
+        avatar.setImageBitmap((Bitmap) (userData.get("image")));
+        score.setText((String)(userData.get("score")));
+        if((String)(userData.get("email")) == null){
+        email.setText("");
+
+        }else {
+            email.setText((String) (userData.get("email")));
+        }
+        phone.setText((String)(userData.get("phone")));
     }
     @Override
     public void onBackPressed() {
