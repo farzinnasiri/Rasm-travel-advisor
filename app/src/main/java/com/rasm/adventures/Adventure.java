@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class Adventure {
 
-    private String user, stream, descriptions, id ;
+    private String title, stream, descriptions, id ;
     private int condition, style,visibility;
     private ArrayList<Bitmap> images;
 //    private ArrayList<ImageWithDescription> imageWithDescriptions;
@@ -28,10 +28,10 @@ public class Adventure {
         condition = (int)map.get("condition");
         style = (int)map.get("style");
         visibility = (int)map.get("style");
-        user = (String)map.get("user");
         id = (String)map.get("id");
         stream = (String)map.get("stream");
         descriptions = (String)map.get("description");
+        title = (String)map.get("title");
 //        images = SQLiteOpenHelperExtender.stringToBitmapArray((String) map.get("images"));
     }
 
@@ -62,9 +62,9 @@ public class Adventure {
     public String getStream() {
         return stream;
     }
-    public String getUser() {
-        return user;
-    }
+//    public String getUser() {
+//        return user;
+//    }
 
     public void setCondition(int condition) {
         this.condition = condition;
@@ -90,9 +90,9 @@ public class Adventure {
         this.style = style;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+//    public void setUser(String user) {
+//        this.user = user;
+//    }
 
     public void setVisibility(int visibility) {
         this.visibility = visibility;

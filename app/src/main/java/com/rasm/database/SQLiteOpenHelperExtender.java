@@ -355,7 +355,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         cv.put(PlaceContract.PlaceEntry.COLUMN_TYPE, type);
         cv.put(PlaceContract.PlaceEntry.COLUMN_DESCRIPTION, describe);
         cv.put(PlaceContract.PlaceEntry.COLUMN_IMAGES, arrayBitmapToJsonString(images));
-        db.insert(UserContract.UserEntry.TABLE_NAME, null, cv);
+        db.insert(PlaceContract.PlaceEntry.TABLE_NAME, null, cv);
 
     }
 
