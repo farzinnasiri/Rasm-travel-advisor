@@ -4,6 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.rasm.adventures.Adventure;
+import com.rasm.database.SQLiteOpenHelperExtender;
+
+import java.util.ArrayList;
+
 public class Administer {
 
     private static Administer administer;
@@ -11,6 +16,9 @@ public class Administer {
 
     private boolean isLoggedIn;
     private String username;
+
+    private SQLiteOpenHelperExtender database;
+
     private Administer(){
         load_data();
     }
@@ -20,6 +28,11 @@ public class Administer {
      */
     private void load_data() {
         load_from_storage();
+        load_from_database();
+    }
+
+    private void load_from_database() {
+        database = new SQLiteOpenHelperExtender(context);
     }
 
     private void load_from_storage() {
@@ -83,4 +96,9 @@ public class Administer {
     public boolean if_username_exist(String username) {
         return false;
     }
+
+    public ArrayList<Adventure> getUserAdventure(String username){
+
+    }
+
 }
