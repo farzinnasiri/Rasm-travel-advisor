@@ -53,7 +53,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 //            +UserContract.UserEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
             + UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE  + " INTEGER(3) , "
             + " FOREIGN KEY(" + UserAdventureContract.UserAdventureEntry.COLUMN_ADVENTUTRE + ") REFERENCES " + AdventureContract.AdventureEntry.TABLE_NAME + "(" + AdventureContract.AdventureEntry._ID + ")  ON DELETE CASCADE ON UPDATE CASCADE , "
-            + UserAdventureContract.UserAdventureEntry.COLUMN_USER  + "TEXT NOT NULL , "
+            + UserAdventureContract.UserAdventureEntry.COLUMN_USER  + " TEXT NOT NULL , "
             + "FOREIGN KEY(" + UserAdventureContract.UserAdventureEntry.COLUMN_USER + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE );";
     private static final String SQL_CREATE_ENTRIES_PLACES = "CREATE TABLE IF NOT EXISTS " + PlaceContract.PlaceEntry.TABLE_NAME + "("
             + PlaceContract.PlaceEntry._ID + " INTEGER(3) PRIMARY KEY AUTOINCREMENT, "
