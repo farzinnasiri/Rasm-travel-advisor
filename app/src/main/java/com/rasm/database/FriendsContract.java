@@ -8,7 +8,7 @@ public class FriendsContract {
 
     public static final class FriendsEntry implements BaseColumns {
 
-        public static final String TABLE_NAME = "user-friends";
+        public static final String TABLE_NAME = "user_friends";
 
         public static final String _ID = BaseColumns._ID;
         public static final String COLUMN_USER = "user";
