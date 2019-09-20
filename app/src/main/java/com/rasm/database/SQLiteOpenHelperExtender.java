@@ -296,7 +296,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         return list;
     }
 
-    public void insertNewAdventure(String ID, String userName, String startTime int condition, String stream, int style, int visibility,ArrayList<Bitmap> images, String descriptions) {
+    public void insertNewAdventure(String ID, String userName, String startTime,String endTime, int condition, String stream, int style, int visibility,ArrayList<Bitmap> images, String descriptions) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(AdventureContract.AdventureEntry.COLUMN_USER, userName);
@@ -306,6 +306,9 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         cv.put(AdventureContract.AdventureEntry.COLUMN_IMAGES, arrayBitmapToJsonString(images));
         cv.put(AdventureContract.AdventureEntry.COLUMN_DESCRIPTIONS, descriptions);
         cv.put(AdventureContract.AdventureEntry.COLUMN_VISIBILITY, visibility);
+        cv.put(AdventureContract.AdventureEntry.COLUMN_TIME_START, startTime);
+        cv.put(AdventureContract.AdventureEntry.COLUMN_TIME_END, endTime);
+
         db.insert(AdventureContract.AdventureEntry.TABLE_NAME, null, cv);
         cv = new ContentValues();
         cv.put(UserAdventureContract.UserAdventureEntry.COLUMN_USER, userName);
@@ -342,6 +345,8 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
 
         return map;
     }
+
+
 
     public static ArrayList<Bitmap> stringToBitmapArray(String json) {
         JSONArray jsonArr = null;
