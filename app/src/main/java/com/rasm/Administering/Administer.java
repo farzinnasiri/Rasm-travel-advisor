@@ -154,8 +154,33 @@ public class Administer {
     public HashMap getUserDatas(String username){
       return  database.getUserDatas(username);
     }
-//    getFriendsAdventure
-//    getSpecialAdventureByCondition
+
+    public ArrayList<String> getUserFriends(String username){
+        return database.getFriends(username);
+    }
+
+
+    public ArrayList<Adventure> getFriendsAdventure(String username){
+        ArrayList<Adventure> adventures = new ArrayList<>();
+
+        for(String friend: getUserFriends(username)){
+            adventures.addAll(getUserAdventure(friend));
+        }
+        return adventures;
+    }
+
+
+    public ArrayList<Adventure> getFriendsAventure(String username , int condition){
+        ArrayList<Adventure> adventures = new ArrayList<>();
+
+        for(Adventure adventure: getFriendsAdventure(username)){
+                if(adventure.getCondition() == 1){
+                    adventures.add(adventure);
+            }
+        }
+        return adventures;
+
+    }
 
 
 
