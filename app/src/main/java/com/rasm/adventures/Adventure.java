@@ -2,16 +2,20 @@ package com.rasm.adventures;
 
 import android.graphics.Bitmap;
 
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.rasm.database.SQLiteOpenHelperExtender;
-
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.HashMap;
 
 public class Adventure {
 
-    private String user, stream, descriptions, id ;
+    private String username;
+    private String stream;
+    private String title;
+    private String date;
+
+
+
+    private String descriptions;
+    private String id ;
     private int condition, style,visibility;
     private ArrayList<Bitmap> images;
 //    private ArrayList<ImageWithDescription> imageWithDescriptions;
@@ -28,7 +32,7 @@ public class Adventure {
         condition = (int)map.get("condition");
         style = (int)map.get("style");
         visibility = (int)map.get("style");
-        user = (String)map.get("user");
+        username = (String)map.get("username");
         id = (String)map.get("id");
         stream = (String)map.get("stream");
         descriptions = (String)map.get("description");
@@ -62,8 +66,8 @@ public class Adventure {
     public String getStream() {
         return stream;
     }
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
     public void setCondition(int condition) {
@@ -90,8 +94,8 @@ public class Adventure {
         this.style = style;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setVisibility(int visibility) {
@@ -114,5 +118,19 @@ public class Adventure {
 //        }
 //
 //    }
+    public String getTitle() {
+        return title;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

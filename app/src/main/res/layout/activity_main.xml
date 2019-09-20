@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3366cc"
+    android:background="@color/dashboard_background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -21,7 +21,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/avatar" />
+            android:src="@drawable/ic_man" />
 
         <TextView
             android:id="@+id/dashboard_txt_points"

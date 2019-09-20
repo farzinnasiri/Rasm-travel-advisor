@@ -15,6 +15,7 @@ import com.rasm.Administering.Administer;
 import com.rasm.adapters.NewFriendsAdventuresAdapter;
 import com.rasm.adapters.OptionsRecyclerViewAdapter;
 import com.rasm.adapters.SuggestedPlacesRecyclerViewAdapter;
+import com.rasm.adventures.Place;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
         score = findViewById(R.id.dashboard_txt_points);
 
 
-
-        HashMap userData = Administer.getInstance().getUserDatas(username.getText().toString());
-
-
-
-        username.setText(Administer.getInstance().getUsername());
-        avatar.setImageBitmap((Bitmap) (userData.get("image")));
-        score.setText((String)(userData.get("score")));
+//
+//        HashMap userData = Administer.getInstance().getUserDatas(username.getText().toString());
+//
+//
+//
+//        username.setText(Administer.getInstance().getUsername());
+//        avatar.setImageBitmap((Bitmap) (userData.get("image")));
+//        score.setText((String)(userData.get("score")));
     }
 
 
@@ -102,15 +103,24 @@ public class MainActivity extends AppCompatActivity {
         newAdventuresRecyclerView.setAdapter(adapter2);
 
 
+        ArrayList<Place> places = new ArrayList<>();
 
+        ArrayList<Integer> images = new ArrayList<Integer>();
+        images.add(R.drawable.image);
+
+        places.add(new Place("تخت جمشید","یک جای خیلی باحالا با کلی چیز میز قدیمی",images));
+        places.add(new Place("آرامگاه سعدی","شیخ اجل سعدی",images));
+        places.add(new Place("آرامگاه حافظ","لسان الغیب شیرازی",images));
+        places.add(new Place("پل طبیعت","یک پل فوق العاده",images));
+        places.add(new Place("تلکابین رامسر","تلکابین سواری در شمال کشور",images));
+        places.add(new Place("کیش","فوق العاده ترین جزیره ایران",images));
 
         LinearLayoutManager suggestedPlacesLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL,false);
         RecyclerView suggestedPlacesRecyclerView = findViewById(R.id.sugested_places_list);
         suggestedPlacesRecyclerView.setLayoutManager(suggestedPlacesLayoutManager);
         SuggestedPlacesRecyclerViewAdapter suggestedPlacesRecyclerViewAdapter =
-                new SuggestedPlacesRecyclerViewAdapter(this,Administer.getInstance()
-                        .getSuggestedPlace(4));
+                new SuggestedPlacesRecyclerViewAdapter(this,places);
 
         suggestedPlacesRecyclerView.setAdapter(suggestedPlacesRecyclerViewAdapter);
     }
