@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         avatar.setImageResource(user.getImage());
         score.setText(user.getScore());
-        Log.i("" , "");
     }
 
 
