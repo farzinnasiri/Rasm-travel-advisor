@@ -258,19 +258,20 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + AdventureContract.AdventureEntry.TABLE_NAME +" WHERE "+ AdventureContract.AdventureEntry._ID+"= '"+advId+"'", null);
         HashMap map = new HashMap();
         int i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_CONDITION);
-        map.put("condition", cursor.getString(i));
+        map.put("condition", cursor.getInt(i));
         i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_DESCRIPTIONS);
         map.put("description", cursor.getString(i));
         i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_STREAM);
         map.put("stream", cursor.getString(i));
         i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_STYLE);
-        map.put("style", cursor.getString(i));
+        map.put("style", cursor.getInt(i));
         i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_VISIBILITY);
-        map.put("visibility", cursor.getString(i));
+        map.put("visibility", cursor.getInt(i));
         i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_USER);
         map.put("user", cursor.getString(i));
         i = cursor.getColumnIndex(AdventureContract.AdventureEntry.COLUMN_IMAGES);
         map.put("images", stringToBitmapArray(cursor.getString(i)));
+        map.put("id", advId);
         return map;
 
     }
@@ -331,7 +332,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         return map;
     }
 
-    private ArrayList<Bitmap> stringToBitmapArray(String json) {
+    public static ArrayList<Bitmap> stringToBitmapArray(String json) {
         JSONArray jsonArr = null;
         ArrayList<Bitmap> images = new ArrayList<Bitmap>();
         try {
@@ -355,7 +356,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         return  images;
     }
 
-    private String arrayBitmapToJsonString(ArrayList<Bitmap> images){
+    public static String arrayBitmapToJsonString(ArrayList<Bitmap> images){
     JSONArray jsonArr = new JSONArray();
     for(int i=0;i<images.size();i++){
         ByteArrayOutputStream out = new ByteArrayOutputStream();
