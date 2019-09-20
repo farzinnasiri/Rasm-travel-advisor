@@ -32,7 +32,7 @@ public class Adventure {
         id = (String)map.get("id");
         stream = (String)map.get("stream");
         descriptions = (String)map.get("description");
-        images = SQLiteOpenHelperExtender.stringToBitmapArray((String) map.get("images"));
+//        images = SQLiteOpenHelperExtender.stringToBitmapArray((String) map.get("images"));
     }
 
     public int getCondition() {

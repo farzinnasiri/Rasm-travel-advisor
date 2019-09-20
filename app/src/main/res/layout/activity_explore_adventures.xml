@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
-            app:titleTextColor="@color/dark"
+            app:titleTextColor="@color/black"
             android:layoutDirection="rtl"
             app:layout_scrollFlags="scroll|enterAlways"
             android:elevation="1dp"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:text="خانه"
-                android:textColor="@color/dark"
+                android:textColor="@color/black"
                 android:textSize="16sp"/>
         </android.support.v7.widget.Toolbar>
 
