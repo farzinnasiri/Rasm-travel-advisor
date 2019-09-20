@@ -69,6 +69,11 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
             +  FriendsContract.FriendsEntry.COLUMN_FRIEND  + " TEXT NOT NULL , "
             + "FOREIGN KEY(" + FriendsContract.FriendsEntry.COLUMN_USER + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE , "
             + "FOREIGN KEY(" + FriendsContract.FriendsEntry.COLUMN_FRIEND + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE ) ;";
+    private static final String SQL_CREATE_ENTRIES_PLACE_IMAGES = "CREATE TABLE IF NOT EXISTS " + PlaceImagesContract.PlaceImagesEntry.TABLE_NAME + " ("
+            + PlaceImagesContract.PlaceImagesEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +  PlaceImagesContract.PlaceImagesEntry.COLUMN_USER  + " TEXT NOT NULL , "
+            +  PlaceImagesContract.PlaceImagesEntry.COLUMN_IMAGES  + " BLOB , "
+            + "FOREIGN KEY(" + PlaceImagesContract.PlaceImagesEntry.COLUMN_USER + ") REFERENCES " + UserContract.UserEntry.TABLE_NAME + "(" + UserContract.UserEntry._COLUMN_NAME + ")  ON DELETE CASCADE ON UPDATE CASCADE ) ;";
 
     public SQLiteOpenHelperExtender(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -84,6 +89,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_ENTRIES_USER_ADVENTURE);
         db.execSQL(SQL_CREATE_ENTRIES_PLACES);
         db.execSQL(SQL_CREATE_ENTRIES_FRIENDS);
+        db.execSQL(SQL_CREATE_ENTRIES_PLACE_IMAGES);
 
     }
 
@@ -94,6 +100,7 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + UserAdventureContract.UserAdventureEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + PlaceContract.PlaceEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + FriendsContract.FriendsEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + PlaceImagesContract.PlaceImagesEntry.TABLE_NAME);
 
         onCreate(db);
     }
@@ -433,5 +440,5 @@ public class SQLiteOpenHelperExtender extends SQLiteOpenHelper {
         return jsonArr.toString();
     }
 
-
+//public void insertImageArray();
 }
